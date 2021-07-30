@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:minHeight="55dp"
+    android:background="@color/black">
+    <RelativeLayout
+        android:id="@+id/rlLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingStart="7dp"
+        android:includeFontPadding="true"
+        android:background="@color/colorLightBlack"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:foregroundGravity="center"
+            android:maxHeight="50dp"
+            android:padding="1dp"
+            android:src="@drawable/acx"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/app_name" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/ivIcon"
+            android:maxWidth="150dp"
+            android:layout_marginStart="5dp"
+            android:layout_centerVertical="true">
+            <TextView
+                android:id="@+id/tvCoin"
+                style="@style/TextView_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/colorGrey"
+                android:textSize="14sp"
+                android:text="Bitcoin"
+                />
+            <TextView
+                android:id="@+id/tvCoinName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextView_style"
+                android:textSize="12sp"
+                android:layout_marginTop="1dp"
+                android:textColor="@color/colorGrey"
+                android:layout_below="@+id/tvCoin"
+                android:text="40,3234 ACO" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tvCoinAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextView_style"
+            android:layout_marginStart="7dp"
+            android:layout_toStartOf="@+id/tvCoinAmountVariation"
+            android:textColor="@color/colorGrey"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="$90,1386"
+            android:minWidth="60dp"
+            android:maxWidth="150dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_centerVertical="true" />
+        <TextView
+            android:id="@+id/tvCoinAmountVariation"
+            android:layout_width="80dp"
+            android:layout_height="55dp"
+            style="@style/TextView_style"
+            android:layout_marginStart="7dp"
+            android:textColor="@color/colorRed"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:textSize="13sp"
+            android:maxLines="1"
+            android:layout_marginTop="0dp"
+            android:foregroundGravity="center"
+            android:ellipsize="end"
+            android:background="@color/colorRedBg"
+            android:layout_alignParentEnd="true"
+            android:includeFontPadding="true"
+            android:text="-11.29%"/>
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/app_bg"
+    android:orientation="vertical"
+    android:scrollbars="none"
+    android:id="@+id/ll_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/toolbar_layout_11" />
+<androidx.core.widget.NestedScrollView
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_10dp"
+    android:layout_marginLeft="@dimen/_10dp"
+    android:layout_marginEnd="@dimen/_10dp"
+    android:layout_marginRight="@dimen/_10dp"
+    android:padding="@dimen/outer_padding">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingBottom="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/llBottoms"
+        >
+    <TextView
+        android:id="@+id/tvReferralCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextView_style"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="@string/enter_referal_code"
+        android:textColor="@color/colorYellow"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:id="@+id/tvReferalCodeDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextView_style_large"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="@string/if_you_have_refer_code_desc_txt" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextView_style"
+        android:text="@string/enter_refer_code"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="45dp" />
+        <EditText
+            android:id="@+id/etReferralCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/editText_style"
+            android:text=""
+            android:hint="AB52RT"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:autofillHints=""
+            android:maxLength="6"
+            android:letterSpacing="0.5"
+            android:inputType="text" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/llBottoms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:paddingBottom="@dimen/_20dp">
+        <TextView
+            android:id="@+id/tvReferCodeTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextView_style"
+            android:textSize="@dimen/small_text_size"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="@string/enter_your_vali_refer_code_and_get_benefits"/>
+        <TextView
+            android:id="@+id/tvVerifyCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            style="@style/ButtonText_style_yellow"
+            android:text="@string/verify_code"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
+</LinearLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/llLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:clipToPadding="true"
+    android:dividerPadding="0dp"
+    android:background="@color/colorYellow">
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:src="@drawable/order_card"
+        android:scaleType="fitXY"
+        android:foregroundGravity="center"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/app_name">
+    </ImageView>
+    <TextView
+        android:id="@+id/tvTabText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ruby \nMetal"
+        android:textStyle="bold"
+        android:layout_marginTop="0dp"
+        style="@style/TextView_style"
+        android:layout_marginStart="7dp"
+        android:textColor="@color/black"
+        android:layout_gravity="center"/>
+</LinearLayout>

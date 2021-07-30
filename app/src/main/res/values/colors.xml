@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorGreen">#149733</color>
+    <color name="colorYellow">#ffb404</color>
+    <color name="colorGrey">#dadada</color>
+    <color name="colorLightBlack">#1e1e1e</color>
+    <color name="colorTabText">#7f7f7f</color>
+    <color name="colorRed">#a62426</color>
+    <color name="colorCream">#CCD1D1</color>
+    <color name="colorDarkGrey">#575757</color>
+    <color name="colorVeriffBg">#121212</color>
+    <color name="colorRedBg">#240c06</color>
+    <color name="colorGreenText">#13904f</color>
+    <color name="colorTextBgGreen">#1c442a</color>
+    <color name="colorPieGreen">#02ddb1</color>
+    <color name="colorPieBlue">#03aef0</color>
+    <color name="colorPieRed">#fe3700</color>
+    <color name="colorBottomSheetBg">#f0f0f0</color>
+    <color name="colorBottomSheetSearchView">#e6e6e6</color>
+    <color name="colorLightYellow">#fdeec5</color>
+
+    //pie chart colors.
+
+
+        />/ red text =#a62426 bg #170406 ##2e0f08
+
+    D5D8DC
+    /./#ABB2B9
+    //1e1d1b
+    050402
+</resources>

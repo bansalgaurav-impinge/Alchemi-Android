@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/app_bg"
+    android:padding="@dimen/outer_padding"
+    android:clickable="true"
+    android:focusable="true">
+    <RelativeLayout
+        android:id="@+id/no_internet_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="wrap_content"
+            android:layout_height="180dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:adjustViewBounds="true"
+            android:paddingTop="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/flag_france"
+            app:tint="@color/colorYellow" />
+        <TextView
+            android:id="@+id/ops_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            style="@style/TextView_style_large"
+            android:text="@string/Oops"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_red_dark" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/nointernettxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ops_tv"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="16dp"
+            android:layout_marginTop="5dp"
+            style="@style/TextView_style"
+            android:gravity="center_horizontal"
+            android:text="@string/you_re_not_connected_to_the_internet_n_please_connect_and_retry"
+            android:textColor="@color/colorYellow"
+            />
+
+        <Button
+            android:id="@+id/refresh_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nointernettxt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_10dp"
+            android:text="@string/refresh"
+            style="@style/ButtonText_style_yellow"/>
+
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

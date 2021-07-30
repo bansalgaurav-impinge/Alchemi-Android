@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    android:id="@+id/scrollView"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/app_bg"
+    android:scrollbars="none"
+    android:clickable="true"
+    android:focusable="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:paddingBottom="@dimen/_20dp"
+        android:focusable="true">
+        <LinearLayout
+            android:id="@+id/llTop"
+            android:layout_width="match_parent"
+            android:layout_height="290dp"
+            android:background="@color/colorYellow"
+            android:orientation="vertical"
+            android:paddingTop="5dp"
+            android:paddingStart="@dimen/_20dp"
+            android:paddingEnd="@dimen/_20dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitXY"
+                android:src="@drawable/acx"
+                app:tint="@color/black" />
+
+            <TextView
+                style="@style/TextView_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/alchemi_capital_exchange"
+                android:textColor="@color/black"
+                android:fontFamily="@font/ubuntu"
+                android:textSize="@dimen/small_text_size" />
+
+            <TextView
+                style="@style/TextView_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="1dp"
+                android:fontFamily="@font/ubuntu"
+                android:text="@string/redefining_finance"
+                android:textColor="@color/colorLightBlack"
+                android:textSize="13sp" />
+
+            <TextView
+                style="@style/TextView_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_20dp"
+                android:text="@string/hi"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                style="@style/TextView_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingStart="@dimen/_10dp"
+                android:paddingEnd="@dimen/_10dp"
+                android:layout_marginTop="@dimen/_10dp"
+                android:text="@string/keep_our_communication_in_one_message"
+                android:textAlignment="center"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/card_bg"
+                android:layout_above="@+id/rlBottom"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="230dp"
+                android:layout_marginBottom="@dimen/_10dp">
+                <include layout="@layout/recycler_view" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rlBottom"
+                style="@style/editText_style"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_alignParentBottom="true">
+
+                <EditText
+                    android:id="@+id/etMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@+id/ivSend"
+                    android:background="@null"
+                    android:inputType="text"
+                    android:maxLength="200"
+                    android:maxLines="5"
+                    android:hint="@string/write_your_message_here"
+                    android:text="" />
+
+                <ImageView
+                    android:id="@+id/ivSend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/app_name"
+                    android:padding="1dp"
+                    android:src="@drawable/ic_send"
+                    app:tint="@color/colorDarkGrey"/>
+            </RelativeLayout>
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>

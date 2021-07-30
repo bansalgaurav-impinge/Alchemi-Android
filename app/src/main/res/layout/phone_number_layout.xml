@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/app_bg"
+    android:id="@+id/scrollview"
+    android:scrollbars="none"
+    android:focusable="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/outer_padding"
+    android:id="@+id/cl_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:id="@+id/llTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingBottom="60dp"
+        android:padding="@dimen/_10dp"
+        app:layout_constraintBottom_toTopOf="@+id/llBottoms">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextView_style"
+            android:text="@string/your_phone_number"
+            android:layout_marginStart="10dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            style="@style/editText_style">
+            <ImageView
+                android:id="@+id/imageAppLogo"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_phone"
+                android:foregroundGravity="center_vertical"
+                android:contentDescription="@string/app_name" />
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:ccp_arrowSize="0dp"
+                app:ccp_showArrow="false"
+                app:ccp_showNameCode="false"
+                app:ccp_hintExampleNumber="true"
+                app:ccp_hintExampleNumberType="FIXED_LINE_OR_MOBILE"
+                android:animateLayoutChanges="true"
+                app:ccpDialog_keyboardAutoPopup="false"
+                app:ccpDialog_cornerRadius="@dimen/_20dp"
+                android:layoutAnimation="@anim/recyclerview_animation"
+                app:ccp_areaCodeDetectedCountry="true"/>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/darker_gray" />
+            <EditText
+                android:id="@+id/etmMobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/editText_style"
+                android:layout_marginTop="0dp"
+                android:padding="0dp"
+                android:text=""
+                android:maxLength="15"
+                android:layout_marginStart="2dp"
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:inputType="phone" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/llBottoms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_10dp"
+        android:layout_marginBottom="@dimen/_20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+        <TextView
+            android:id="@+id/tvReferCodeTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextView_style"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:textSize="@dimen/small_text_size"
+            android:text="@string/we_use_your_phone_number_to_verify_important_changes"/>
+        <TextView
+            android:id="@+id/tvSendCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            style="@style/ButtonText_style_yellow"
+            android:text="@string/send_verification_code"
+            />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: pro.streem.pbandk:pbandk-runtime-android-debug:0.10.0-beta.4@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0d61c402a3de9a3e81f307a382a08ee5/jetified-runtime-debug/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0d61c402a3de9a3e81f307a382a08ee5/jetified-runtime-debug/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0d61c402a3de9a3e81f307a382a08ee5/jetified-runtime-debug/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/pro.streem.pbandk/pbandk-runtime-android-debug/0.10.0-beta.4/c8333749073e6224447d0a4aed40c78f30a44f4/pbandk-runtime-android-debug-0.10.0-beta.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

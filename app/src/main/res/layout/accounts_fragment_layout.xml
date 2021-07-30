@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@drawable/app_bg"
+    android:padding="20dp">
+    <RelativeLayout
+        android:id="@+id/rlTotalBalance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:fillViewport="true">
+        <TextView
+            android:id="@+id/tvBalance"
+            style="@style/TextView_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:text="@string/total_balance"
+            android:layout_centerVertical="true"/>
+        <ImageView
+            android:id="@+id/ivShowHideText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_show"
+            app:tint="@color/colorGrey"
+            android:layout_toEndOf="@+id/tvBalance"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/app_name"/>
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tvTotalBalance"
+        style="@style/TextView_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorGrey"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rlTotalBalance" />
+
+    <TextView
+        android:id="@+id/tvAmount"
+        style="@style/ButtonText_style_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/_10dp"
+        android:backgroundTint="@color/colorGreen"
+        android:gravity="center"
+        android:paddingStart="@dimen/_20dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="@dimen/_20dp"
+        android:paddingBottom="5dp"
+        android:text="+$123739"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/small_text_size"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTotalBalance" />
+
+    <ExpandableListView
+        android:id="@+id/expendableList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:childDivider="@color/colorDarkGrey"
+        android:groupIndicator="@null"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAmount"
+        android:layout_marginTop="@dimen/_10dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

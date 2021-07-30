@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.geetest.sensebot:sensebot:4.3.2@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/24ef12f707783d9a75cd50bc903a91e4/jetified-sensebot-4.3.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/24ef12f707783d9a75cd50bc903a91e4/jetified-sensebot-4.3.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/24ef12f707783d9a75cd50bc903a91e4/jetified-sensebot-4.3.2/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.geetest.sensebot/sensebot/4.3.2/168957e2f3dc2a4aaadbd3b939ce4cc610c17a46/sensebot-4.3.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

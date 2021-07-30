@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/app_bg"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true"
+    android:fitsSystemWindows="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include layout="@layout/toolbar_layout" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:focusable="true">
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/llBottoms"
+                android:clickable="true"
+                android:layout_marginBottom="50dp"
+                android:focusable="true"/>
+        </FrameLayout>
+        <LinearLayout
+            android:id="@+id/llBottoms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="5dp"
+            android:layout_alignParentBottom="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:background="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+            <com.app.alchemi.utils.CustomTabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:tabMaxWidth="0dp"
+                app:tabGravity="fill"
+                app:tabMode="fixed"
+                android:elevation="5dp"
+                android:fillViewport="true"
+                android:fitsSystemWindows="true"
+                android:background="@color/black"
+                style="@style/CustomTabText"
+                app:tabTextColor="@color/colorGrey"
+                app:tabIndicatorGravity="top"
+                android:textAlignment="center"
+                app:tabUnboundedRipple="false"
+                app:tabRippleColor="@null"
+                android:clickable="true"
+                app:tabIconTintMode="src_in"
+                app:tabIndicatorFullWidth="false"
+                app:tabIconTint="@android:color/transparent"
+                app:tabIndicatorColor="@color/black"
+                app:tabIndicatorHeight="0dp"
+                app:tabIndicator="@color/black"
+                app:tabSelectedTextColor="@color/colorYellow"
+                android:focusable="true" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

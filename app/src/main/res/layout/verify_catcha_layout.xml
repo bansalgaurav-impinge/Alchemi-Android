@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/app_bg"
+    android:scrollbars="none"
+    android:id="@+id/scrollable"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/cl_parent"
+        android:layout_marginStart="@dimen/_10dp"
+        android:layout_marginLeft="@dimen/_10dp"
+        android:layout_marginEnd="@dimen/_10dp"
+        android:layout_marginRight="@dimen/_10dp"
+        android:padding="@dimen/outer_padding"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.geetest.sdk.views.GT3GeetestButton
+        android:id="@+id/btn_geetest"
+        android:layout_width="290dp"
+        android:layout_height="44dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="horizontal" />
+        <TextView
+            android:id="@+id/tvCaptcha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            style="@style/TextView_style"
+            android:textSize="@dimen/small_text_size"
+            android:paddingBottom="@dimen/_20dp"
+            android:text="@string/slide_and_complete_captcha"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

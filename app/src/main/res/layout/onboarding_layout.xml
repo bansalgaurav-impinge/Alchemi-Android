@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:foregroundGravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical">
+        <ImageView
+            android:id="@+id/imageCardFeature"
+            android:layout_width="wrap_content"
+            android:layout_height="340dp"
+            android:src="@drawable/feature_1"
+            android:background="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/tvCashback"
+            android:contentDescription="@string/app_name" />
+        <TextView
+            android:id="@+id/tvCashback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextView_style_large"
+            android:textColor="@color/colorYellow"
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"
+            android:paddingBottom="@dimen/_10dp"
+            android:text="@string/your_metal_card_best_cashback_ever"/>
+        <TextView
+            android:id="@+id/tvCashbackBenefits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextView_style"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:foregroundGravity="fill"
+            android:layout_marginTop="5dp"
+            android:includeFontPadding="false"
+            android:paddingBottom="@dimen/_10dp"
+            android:textColor="@color/white"
+            android:text="@string/upto_cashback_on_your_spending"/>
+        </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
