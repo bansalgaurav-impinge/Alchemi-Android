@@ -145,7 +145,7 @@ class TrackFragment: Fragment(),OnItemClickListener {
         }catch (e: Exception){
             e.printStackTrace()
         }
-        searchCoin(view)
+        searchCoinByName(view)
        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         val globalLayoutListener = ViewTreeObserver.OnGlobalLayoutListener {
 
@@ -334,7 +334,7 @@ class TrackFragment: Fragment(),OnItemClickListener {
     /***
      *  Method to search data
      */
-    fun searchCoin(view:View){
+    fun searchCoinByName(view:View){
         view.etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
 
