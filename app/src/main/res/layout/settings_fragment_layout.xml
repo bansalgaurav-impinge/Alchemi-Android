@@ -96,10 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorLightBlack"
-                android:paddingTop="@dimen/_10dp"
-                android:paddingBottom="@dimen/_10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
+               android:padding="15dp"
                 android:layout_marginTop="7dp">
                 <TextView
                     android:layout_width="wrap_content"
@@ -150,10 +147,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorLightBlack"
-                android:paddingTop="@dimen/_10dp"
-                android:paddingBottom="@dimen/_10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
+                android:padding="15dp"
                 android:layout_marginTop="7dp">
                 <TextView
                     android:layout_width="wrap_content"
@@ -204,10 +198,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorLightBlack"
-                android:paddingTop="@dimen/_10dp"
-                android:paddingBottom="@dimen/_10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
+                android:padding="15dp"
                 android:layout_marginTop="7dp">
                 <TextView
                     android:layout_width="wrap_content"
@@ -257,10 +248,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorLightBlack"
-                android:paddingTop="@dimen/_10dp"
-                android:paddingBottom="@dimen/_10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
+                android:padding="15dp"
                 android:clickable="true"
                 android:layout_marginTop="7dp">
                 <TextView
@@ -284,16 +272,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.01dp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@color/colorDivider"/>
             <RelativeLayout
                 android:id="@+id/rlChangePasscode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorLightBlack"
-                android:paddingTop="@dimen/_10dp"
-                android:paddingBottom="@dimen/_10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp">
+              android:padding="15dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -315,16 +300,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.01dp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@color/colorDivider"/>
             <RelativeLayout
                 android:id="@+id/rlTwoFactorAuthentication"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorLightBlack"
-                android:paddingTop="@dimen/_10dp"
-                android:paddingBottom="@dimen/_10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp">
+                android:padding="15dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -346,16 +328,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.01dp"
-                android:background="@color/colorGrey"/>
+                android:background="@color/colorDivider"/>
             <RelativeLayout
                 android:id="@+id/rlAntiPhishingCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorLightBlack"
-                android:paddingTop="@dimen/_10dp"
-                android:paddingBottom="@dimen/_10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp">
+               android:padding="15dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -389,10 +368,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorLightBlack"
-                android:paddingTop="@dimen/_10dp"
-                android:paddingBottom="@dimen/_10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
+               android:padding="15dp"
                 android:layout_marginTop="7dp">
                 <TextView
                     android:layout_width="wrap_content"
@@ -427,10 +403,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorLightBlack"
-                android:paddingTop="@dimen/_10dp"
-                android:paddingBottom="@dimen/_10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
+                android:padding="15dp"
                 android:layout_marginTop="7dp">
                 <TextView
                     android:layout_width="wrap_content"
@@ -465,10 +438,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorLightBlack"
-                android:paddingTop="@dimen/_10dp"
-                android:paddingBottom="@dimen/_10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
+                android:padding="15dp"
                 android:layout_marginTop="7dp">
                 <TextView
                     android:layout_width="wrap_content"
@@ -503,10 +473,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorLightBlack"
-                android:paddingTop="@dimen/_10dp"
-                android:paddingBottom="@dimen/_10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
+                android:padding="15dp"
                 android:layout_marginTop="7dp">
                 <TextView
                     android:layout_width="wrap_content"
@@ -529,16 +496,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.01dp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@color/colorDivider"/>
             <RelativeLayout
                 android:id="@+id/rlTermsConditions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorLightBlack"
-                android:paddingTop="@dimen/_10dp"
-                android:paddingBottom="@dimen/_10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp">
+               android:padding="15dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -560,16 +524,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.01dp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@color/colorDivider"/>
             <RelativeLayout
                 android:id="@+id/rlPrivacyNotice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorLightBlack"
-                android:paddingTop="@dimen/_10dp"
-                android:paddingBottom="@dimen/_10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp">
+               android:padding="15dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -591,16 +552,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.01dp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@color/colorDivider"/>
             <RelativeLayout
                 android:id="@+id/rlSystemStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorLightBlack"
-                android:paddingTop="@dimen/_10dp"
-                android:paddingBottom="@dimen/_10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp">
+               android:padding="15dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -622,16 +580,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.01dp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@color/colorDivider"/>
             <RelativeLayout
                 android:id="@+id/rlVisitWebSite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorLightBlack"
-                android:paddingTop="@dimen/_10dp"
-                android:paddingBottom="@dimen/_10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp">
+               android:padding="15dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

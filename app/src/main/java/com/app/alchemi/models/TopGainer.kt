@@ -47,5 +47,6 @@ data class TopGainer(
     val VOLUMEDAYTO: Double,
     val VOLUMEHOUR: Double,
     val VOLUMEHOURTO: Double,
-    val user_favourite: Boolean
+    val user_favourite: Boolean,
+    val coin_notification: Boolean
 )

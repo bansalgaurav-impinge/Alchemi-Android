@@ -69,7 +69,7 @@
             android:hint="AB52RT"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:autofillHints=""
+            android:autofillHints="AB52RT"
             android:maxLength="6"
             android:letterSpacing="0.5"
             android:inputType="text" />

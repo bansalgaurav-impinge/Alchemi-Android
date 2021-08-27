@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
 
-
             try {
 
                 val data: Uri = intent?.data!!
@@ -72,10 +71,10 @@ class MainActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left)
 
         }
-     //   eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjcxYjdjM2E0LWQ1MmQtNDk5Ni05N2M1LTRkNGM4YmViNjNkOCIsImVtYWlsIjoidXBwYWwuaGFycnkxMUBnbWFpbC5jb20iLCJqd3Rfc2VjcmV0IjoiZGNjYjI5N2ItMjNhYS00ZDBmLWE2ZDEtZTNiYjVmMzNmZGIzIn0.kjzcdo1w_xvAGsPPzTBqo2UC78-Cnqg8Wibr9Z1DwMw
-        var str="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjcxYjdjM2E0LWQ1MmQtNDk5Ni05N2M1LTRkNGM4YmViNjNkOCIsImVtYWlsIjoidXBwYWwuaGFycnkxMUBnbWFpbC5jb20iLCJqd3Rfc2VjcmV0IjoiZGNjYjI5N2ItMjNhYS00ZDBmLWE2ZDEtZTNiYjVmMzNmZGIzIn0.kjzcdo1w_xvAGsPPzTBqo2UC78-Cnqg8Wibr9Z1DwMw"
-        AlchemiApplication.alchemiApplication?.saveUserToken(str)
-        AlchemiApplication.alchemiApplication?.saveUserDetails("71b7c3a4-d52d-4996-97c5-4d4c8beb63d8")
+        ///eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjcxYjdjM2E0LWQ1MmQtNDk5Ni05N2M1LTRkNGM4YmViNjNkOCIsImVtYWlsIjoidXBwYWwuaGFycnkxMUBnbWFpbC5jb20iLCJqd3Rfc2VjcmV0IjoiZGNjYjI5N2ItMjNhYS00ZDBmLWE2ZDEtZTNiYjVmMzNmZGIzIn0.kjzcdo1w_xvAGsPPzTBqo2UC78-Cnqg8Wibr9Z1DwMw
+//        var str="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjcxYjdjM2E0LWQ1MmQtNDk5Ni05N2M1LTRkNGM4YmViNjNkOCIsImVtYWlsIjoidXBwYWwuaGFycnkxMUBnbWFpbC5jb20iLCJqd3Rfc2VjcmV0IjoiZGNjYjI5N2ItMjNhYS00ZDBmLWE2ZDEtZTNiYjVmMzNmZGIzIn0.kjzcdo1w_xvAGsPPzTBqo2UC78-Cnqg8Wibr9Z1DwMw"
+//        AlchemiApplication.alchemiApplication?.saveUserToken(str)
+//        AlchemiApplication.alchemiApplication?.saveUserDetails("71b7c3a4-d52d-4996-97c5-4d4c8beb63d8")
         tvSignUp.setOnClickListener {
             navigateToSignUp()
 

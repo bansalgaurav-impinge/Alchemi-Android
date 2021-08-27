@@ -3,36 +3,43 @@ package com.app.alchemi.views.adapters
 import android.app.Activity
 import android.content.Context
 import android.graphics.Color
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.app.alchemi.R
+import com.app.alchemi.models.CoinData
 import com.app.alchemi.models.CryptoLiveData
-import com.app.alchemi.models.TopGainer
+import com.app.alchemi.utils.MyValueFormatter
 import com.app.alchemi.utils.ViewUtils
 import com.app.alchemi.views.activities.HomeActivity
 import com.app.alchemi.views.fragments.dashboardFeatures.CoinDetailFragment
-import com.app.alchemi.views.fragments.settings.WebViewFragment
-import kotlinx.android.synthetic.main.top_gainers_card.view.*
-import kotlinx.android.synthetic.main.top_gainers_card.view.ivIcon
-import kotlinx.android.synthetic.main.top_gainers_card.view.tvCoin
-import kotlinx.android.synthetic.main.top_gainers_card.view.tvCoinAmount
-import kotlinx.android.synthetic.main.top_gainers_card.view.tvCoinAmountVariation
-import kotlinx.android.synthetic.main.top_gainers_card.view.tvCoinName
+import com.app.alchemi.views.fragments.dashboardFeatures.HomeFragment
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.IFillFormatter
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+
 import kotlinx.android.synthetic.main.trade_coin_card.view.*
+import java.util.ArrayList
 
 
 internal class TradeCoinsAdapter(
-    tradeList: List<CryptoLiveData>
+    tradeList: List<CryptoLiveData>,
+    homeFragment: HomeFragment
 ) : RecyclerView.Adapter<TradeCoinsAdapter.ViewHolder>() {
     val tradeList: List<CryptoLiveData> = tradeList
     private var mContext: Context? = null
-
+    var homeFragmnet=homeFragment
+    lateinit var  data: List<CoinData>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.trade_coin_card, parent, false)
         return ViewHolder(v)
@@ -40,12 +47,25 @@ internal class TradeCoinsAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.setIsRecyclable(false)
+       var color=ContextCompat.getColor(mContext!!,R.color.colorYellow)
         if ((position+1)%2==0){
             holder.itemView.clParent.background.setTint(ContextCompat.getColor(mContext!!,R.color.colorYellow))
             holder.itemView.ivGraph.drawable.setTint(ContextCompat.getColor(mContext!!,R.color.black))
+            holder.itemView.chart.setBackgroundColor(ContextCompat.getColor(mContext!!,R.color.colorYellow))
+            color=ContextCompat.getColor(mContext!!,R.color.black)
         }else{
+            holder.itemView.chart.setBackgroundColor(ContextCompat.getColor(mContext!!,R.color.white))
             holder.itemView.clParent.background.setTint(ContextCompat.getColor(mContext!!,R.color.white))
             holder.itemView.ivGraph.drawable.setTint(ContextCompat.getColor(mContext!!,R.color.colorYellow))
+            color=ContextCompat.getColor(mContext!!,R.color.colorYellow)
+        }
+        try {
+            homeFragmnet.getCoinHistory(
+                tradeList[position].FROMSYMBOL,
+                holder.itemView,holder.itemView.chart,color)
+
+        }catch (e: Exception){
+            e.printStackTrace()
         }
         if (tradeList.isNotEmpty()){
             if (position==0){
@@ -57,6 +77,7 @@ internal class TradeCoinsAdapter(
             if (position==2){
                 holder.itemView.tvCoin.text="Tron"
             }
+
         }
         holder.itemView.tvCoinName.text=tradeList[position].FROMSYMBOL
         val d=tradeList[position].CHANGEPCT24HOUR
@@ -106,4 +127,6 @@ internal class TradeCoinsAdapter(
         init { mContext = itemView.context
         }
     }
+
 }
+

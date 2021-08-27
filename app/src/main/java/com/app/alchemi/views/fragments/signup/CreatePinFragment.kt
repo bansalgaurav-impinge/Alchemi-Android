@@ -15,6 +15,7 @@ import com.app.alchemi.utils.AlchemiApplication
 import com.app.alchemi.utils.FragmentNavigation
 import com.app.alchemi.utils.ViewUtils
 import com.app.alchemi.viewModel.AddUserPinViewModel
+import com.app.alchemi.views.activities.HomeActivity
 import com.app.alchemi.views.activities.MainActivity
 import kotlinx.android.synthetic.main.change_pin_layout.*
 import kotlinx.android.synthetic.main.create_pin_fragment_layout.*
@@ -95,15 +96,17 @@ class CreatePinFragment : Fragment() {
             val hashMap= HashMap<String,String>()
             hashMap[Constants.KEY_PIN]=pin.trim()
             hashMap[Constants.KEY_USER]=""+ AlchemiApplication.alchemiApplication?.getUUID()
-            addUserPinViewModel.addUserPin(hashMap, "", view)!!.observe(viewLifecycleOwner, Observer { emailConfirmationRequestModel ->
+            addUserPinViewModel.addUserPin(hashMap, "", view)!!.observe(viewLifecycleOwner, Observer { liveData ->
                 ViewUtils.dismissProgress()
-                if (emailConfirmationRequestModel.code==Constants.CODE_200){
+                if (liveData.code==Constants.CODE_200){
                 AlchemiApplication.alchemiApplication?.clearAllData()
-                startActivity(Intent(context, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
+                    AlchemiApplication.alchemiApplication?.saveUserToken(liveData.data.jwt_token)
+                    AlchemiApplication.alchemiApplication?.saveUserDetails(liveData.data.user_id)
+                    startActivity(Intent(context, HomeActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
                 activity?.finish()
                    /// showEmailConfirmationScreen()
                 }else{
-                    val msg =emailConfirmationRequestModel.message
+                    val msg =liveData.message
                     ViewUtils.showSnackBar(scrollView,""+msg)
                 }
 

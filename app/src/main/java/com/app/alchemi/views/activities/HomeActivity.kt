@@ -3,19 +3,23 @@ package com.app.alchemi.views.activities
 
 import Constants
 
+
 import android.os.Bundle
 import android.util.Log
+
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.app.alchemi.R
 import com.app.alchemi.utils.AlchemiApplication
 import com.app.alchemi.utils.Target
 import com.app.alchemi.utils.ViewUtils.Companion.hideKeyBoard
 import com.app.alchemi.utils.navigateTo
+import com.app.alchemi.viewModel.UserDetailViewModel
 import com.app.alchemi.views.adapters.ViewPagerAdapter
 import com.app.alchemi.views.adapters.getTabIndicator
 import com.app.alchemi.views.fragments.dashboardFeatures.*
@@ -25,11 +29,14 @@ import com.daimajia.androidanimations.library.YoYo
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.tab_layout.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
+import androidx.lifecycle.Observer
+import com.app.alchemi.views.fragments.settings.ContactSupportFragment
 import java.util.*
 
 
 class HomeActivity : AppCompatActivity() {
     var tab_layout: TabLayout? = null
+    internal lateinit var userDetailViewModel: UserDetailViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,14 +45,20 @@ class HomeActivity : AppCompatActivity() {
         if ( AlchemiApplication.alchemiApplication?.getIndex()?.trim()!="" && AlchemiApplication.alchemiApplication?.getIndex()?.trim()!!.isNotEmpty() && AlchemiApplication.alchemiApplication?.getIndex()?.trim()!=null) {
             Constants.KEY_Index = AlchemiApplication.alchemiApplication?.getIndex().toString()
            if (Constants.KEY_Index == "2") {
-                if (Constants.isEditProfile) {
+               if (Constants.isEditProfile) {
                     val bundle= Bundle()
                     replaceFragment(EmailVerificationFragment(),""+EmailVerificationFragment,bundle)
                 }
             }
         }
+        userDetailViewModel = ViewModelProvider(this).get(UserDetailViewModel::class.java)
+        getPinDetail()
         ivChat.setOnClickListener {
             val  bundle= Bundle()
+            replaceFragment(ContactSupportFragment(),""+ ContactSupportFragment,bundle)
+//            val  bundle= Bundle()
+//            navigateTo(this, Target.ADD_PAYMENT_METHOD)
+//            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left)
         }
         ivChat.visibility = View.VISIBLE
         rlAcx.visibility = View.VISIBLE
@@ -55,13 +68,20 @@ class HomeActivity : AppCompatActivity() {
         ivBack.visibility=View.GONE
         ivScan.visibility=View.GONE
         ivChart.visibility=View.GONE
+        if (intent.extras != null) {
+            if (intent.extras!!.containsKey(Constants.KEY_TYPE)){
+                if (intent.extras!!.getString(Constants.KEY_TYPE)=="contact_support_messages"){
+                    ivChat.performClick()
+                }
+            }
+        }
         /***
          *  Button click listeners
          */
         ivSettings.setOnClickListener {
             val currentFragment = supportFragmentManager.fragments.last()
             val bundle = Bundle()
-            replaceFragment(SettingsFragment(), "SettingsFragment", bundle)
+            replaceFragment(SettingsFragment(), ""+SettingsFragment, bundle)
         }
         rlAcx.setOnClickListener {
             val bundle = Bundle()
@@ -78,6 +98,20 @@ class HomeActivity : AppCompatActivity() {
             navigateTo(this, Target.ACX_PAY)
 //            replaceFragment(QRCodeFragment(), ""+QRCodeFragment, bundle)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_left)
+        }
+        ivBack.setOnClickListener {
+            if(supportFragmentManager.backStackEntryCount>0) {
+                clearStack(1)
+            }else{
+                if (tab_layout?.selectedTabPosition==4){
+                    selectPage(3)
+                }else {
+                    selectPage(0)
+                }
+            }
+        }
+        tvCancel.setOnClickListener {
+            ivBack.performClick()
         }
 
 
@@ -142,7 +176,7 @@ class HomeActivity : AppCompatActivity() {
                 } else if (tab.position == 2) {
                     hideView(2)
                    // ivBack.isEnabled=false
-                    toolbar_title.text = getString(R.string.acx)
+                    toolbar_title.text = getString(R.string.alchemi_capital_exchange)
                     ivBack.setImageResource(R.drawable.ic_back)
                     ivChat.visibility = View.GONE
                     rlAcx.visibility = View.GONE
@@ -154,7 +188,7 @@ class HomeActivity : AppCompatActivity() {
                 } else if (tab.position == 3) {
                     hideView(3)
                    // ivBack.isEnabled=false
-                    toolbar_title.text = getString(R.string.track)
+                    toolbar_title.text = getString(R.string.track_coin)
                     ivBack.setImageResource(R.drawable.ic_back)
                     ivChat.visibility = View.GONE
                     rlAcx.visibility = View.GONE
@@ -272,12 +306,13 @@ class HomeActivity : AppCompatActivity() {
 
     fun clearStack( index:Int){
         val count = supportFragmentManager.backStackEntryCount
-        Log.e("test>>>",">>>"+supportFragmentManager.fragments.last()+" +==="+count)
         for (i in 0 until index) {
             supportFragmentManager.popBackStack()
         }
 
     }
+
+
 
     /**
      *
@@ -312,7 +347,6 @@ class HomeActivity : AppCompatActivity() {
         toolbar_title.setTextColor(ContextCompat.getColor(this,R.color.colorGrey))
         ivNotification.visibility=View.GONE
         ivCrop.visibility=View.GONE
-
     }
 
     /**
@@ -329,7 +363,36 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    fun getPinDetail(){
+        if (AlchemiApplication.alchemiApplication?.getToken().toString()
+                .isNotEmpty() && AlchemiApplication.alchemiApplication?.getToken() != null) {
+            if (AlchemiApplication.alchemiApplication?.getPassCodeSettings().toString().isEmpty() || AlchemiApplication.alchemiApplication?.getPassCodeSettings() == null) {
+                getUserDetail()
+
+            }
+        }
+    }
+    private fun getUserDetail() {
+        userDetailViewModel.getUserDetail(
+            Constants.Token + AlchemiApplication.alchemiApplication?.getToken(),
+            llTab
+        )!!.observe(this, Observer { userDetailModel ->
+            if (userDetailModel.code == Constants.CODE_200) {
+                if (userDetailModel.data.pin != null && userDetailModel.data.pin != "null") {
+                    AlchemiApplication.alchemiApplication?.savePasscode(userDetailModel.data.pin)
+                    AlchemiApplication.alchemiApplication?.savePassCodeSettings("" + userDetailModel.data.pin_status)
+                    if (userDetailModel.data.pin_status) {
+                    }
+                }
+            }
+
+        })
+    }
+
 }
+
+
+
 
 
 

@@ -22,16 +22,18 @@
 
         <TextView
             android:id="@+id/tvCurrencyTitle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="0dp"
             android:padding="15dp"
-            style="@style/TextView_style_large"
+            android:layout_centerInParent="true"
+            style="@style/ButtonText_style_Bg"
+            android:background="@color/transparent"
             android:layout_centerVertical="true"
             android:text="@string/deposit_currency"
             android:textAlignment="center"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/roboto_bold"
             android:includeFontPadding="true"
             android:textColor="@color/black"
             android:textStyle="bold" />
@@ -52,13 +54,44 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/colorBottomSheetBg">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:padding="@dimen/_20dp"
+            android:orientation="vertical"
             android:layout_marginBottom="7dp"
             android:background="@color/colorBottomSheetSearchView">
+            <TextView
+                android:id="@+id/tvEarnCurrency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                style="@style/TextView_style_large"
+                android:text="@string/select_cryptocurrency"
+                android:textAlignment="center"
+                android:fontFamily="@font/roboto_medium"
+                android:includeFontPadding="true"
+                android:textColor="@color/black"
+                android:visibility="gone"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tvEarnCurrencyTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                style="@style/TextView_style_large"
+                android:layout_marginBottom="15dp"
+                android:text="@string/select_which_currency_you_want_to_earn"
+                android:textAlignment="center"
+                android:includeFontPadding="true"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:textColor="@color/black"
+                />
             <EditText
                 android:id="@+id/etSearchCoin"
                 android:layout_width="match_parent"
@@ -69,6 +102,8 @@
                 android:hint="@string/deposit_currency"
                 android:drawableEnd="@drawable/ic_search"
                 android:maxLength="25"
+                android:textSize="16sp"
+                android:paddingEnd="@dimen/_20dp"
                 android:background="@drawable/et_stroke_bg"
                 android:textColorHint="@color/colorDarkGrey"
                 android:digits="qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM"

@@ -22,6 +22,8 @@ import com.app.alchemi.utils.AlchemiApplication
 import com.app.alchemi.utils.FragmentNavigation
 import com.app.alchemi.utils.ViewUtils
 import com.app.alchemi.viewModel.EmailConfirmationRequestViewModel
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.sign_up_fragment_layout.*
 import kotlinx.android.synthetic.main.sign_up_fragment_layout.llBottoms
 import kotlinx.android.synthetic.main.toolbar_layout.*
@@ -29,6 +31,7 @@ import kotlinx.android.synthetic.main.toolbar_layout.*
 
 class SignUpEmailFragment: Fragment() {
     internal lateinit var emailConfirmationRequestViewModel: EmailConfirmationRequestViewModel
+    var fcmToken=""
     companion object {
         fun newInstance() = SignUpEmailFragment()
     }
@@ -67,6 +70,11 @@ class SignUpEmailFragment: Fragment() {
             ll_checkbox.visibility=View.VISIBLE
             requireActivity().toolbar_title.text  = getString(R.string.signup)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        firebaseToken()
     }
 
     /**
@@ -139,11 +147,17 @@ class SignUpEmailFragment: Fragment() {
         else if (!ViewUtils.verifyAvailableNetwork(requireContext())) {
             ViewUtils.showSnackBar(cl_parent,getString(R.string.you_re_not_connected_to_the_internet_n_please_connect_and_retry))
         }
+        else if (fcmToken.isEmpty()){
+            firebaseToken()
+        }
         else {
             ViewUtils.showProgress(requireContext())
             val hashMap= HashMap<String,String>()
             hashMap[Constants.KEY_EMAIL]=email.trim()
             hashMap[Constants.KEY_REDIRECT_URL]=""+Constants.APP_URL.trim()
+            hashMap[Constants.KEY_DEVICE_ID]=""+Constants.getDeviceID(requireContext())
+            hashMap[Constants.KEY_DEVICE_TOKEN]=""+fcmToken
+            hashMap[Constants.KEY_DEVICE_TYPE]=Constants.DEVICE_NAME
             if (!Constants.isSignIn) {
                 hashMap[Constants.KEY_REFERRAL_CODE] = "" + requireArguments()[Constants.KEY_REFERRAL_CODE]
             }
@@ -171,6 +185,22 @@ class SignUpEmailFragment: Fragment() {
         }
         super.onDestroyView()
     }
+    /***
+     *  Firebase token
+     */
+    fun firebaseToken(){
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.e( "FCM Token", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
 
+            // Get new FCM registration token
+            fcmToken=task.result
+            // Log and toast
+            Log.d("FCM Token", task.result)
+
+        })
+    }
 
 }

@@ -1,7 +1,9 @@
 package com.app.alchemi.views.fragments.dashboardFeatures
 
+import Constants
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.getIntent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,8 +16,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.app.alchemi.R
-import com.app.alchemi.models.UserDetailModel
-import com.app.alchemi.repository.MainActivityRepository
 import com.app.alchemi.utils.AlchemiApplication
 import com.app.alchemi.utils.ViewUtils
 import com.app.alchemi.viewModel.LogoutUserViewModel
@@ -24,9 +24,7 @@ import com.app.alchemi.views.activities.HomeActivity
 import com.app.alchemi.views.activities.MainActivity
 import com.app.alchemi.views.fragments.settings.*
 import kotlinx.android.synthetic.main.settings_fragment_layout.*
-import kotlinx.android.synthetic.main.settings_fragment_layout.scrollView
 import kotlinx.android.synthetic.main.toolbar_layout.*
-import org.bouncycastle.asn1.cmc.CMCStatus.pending
 
 
 class SettingsFragment: Fragment() {
@@ -98,19 +96,6 @@ class SettingsFragment: Fragment() {
             clickNavigator(tvLogout)
         }
 
-
-
-
-        try {
-            if (activity!=null) {
-                (activity as HomeActivity).ivBack.setOnClickListener {
-                    (activity as HomeActivity).clearStack(1)
-                }
-            }
-        }catch (e: Exception){
-            e.printStackTrace()
-        }
-
     }
 
     override fun onResume() {
@@ -118,7 +103,6 @@ class SettingsFragment: Fragment() {
         isClick=false
         (activity as HomeActivity).tab_layout?.visibility=View.GONE
         requireActivity().toolbar_title.text  = getString(R.string.settings)
-        requireActivity().ivBack.setImageResource(R.drawable.ic_back)
         requireActivity().ivChat.visibility=View.GONE
         requireActivity().rlAcx.visibility=View.GONE
         requireActivity().ivSettings.visibility=View.GONE
@@ -132,7 +116,6 @@ class SettingsFragment: Fragment() {
             (activity as HomeActivity).ivChat.visibility = View.VISIBLE
             (activity as HomeActivity).rlAcx.visibility = View.VISIBLE
             (activity as HomeActivity).toolbar_title.text = getString(R.string.home)
-            (activity as HomeActivity).ivBack.setImageResource(R.drawable.setting)
             requireActivity().ivSettings.visibility=View.VISIBLE
             requireActivity().ivBack.visibility=View.GONE
         }
@@ -203,7 +186,6 @@ class SettingsFragment: Fragment() {
                     AlchemiApplication.alchemiApplication?.saveScreenIndex("0")
                     startActivity(Intent(context, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
                     activity?.finish()
-                    /// showEmailConfirmationScreen()
                 }else{
                     val msg =logoutUserModel.message
                     ViewUtils.showSnackBar(scrollView,""+msg)

@@ -18,18 +18,21 @@
             android:padding="5dp">
 
             <TextView
-                android:layout_width="match_parent"
+                style="@style/ButtonText_style_Bg"
+                android:background="@color/transparent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="0dp"
+                android:fontFamily="@font/roboto_bold"
+                android:includeFontPadding="true"
                 android:padding="15dp"
-                style="@style/TextView_style_large"
-                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
                 android:text="@string/trade"
                 android:textAlignment="center"
-                android:includeFontPadding="true"
                 android:textColor="@color/black"
-                android:fontFamily="@font/roboto_medium"
+                android:textSize="19sp"
                 android:textStyle="bold" />
             <ImageView
                 android:id="@+id/ivCrossIcon"
@@ -70,19 +73,21 @@
                     android:scaleType="fitCenter"
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/buy"/>
+
                 <TextView
                     android:id="@+id/tvGallery"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="center"
                     android:padding="5dp"
-                    style="@style/TextView_style_large"
+                    style="@style/ButtonText_style_Bg"
+                    android:background="@color/transparent"
                     android:text="@string/buy"
                     android:textAlignment="center"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/roboto_medium"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -119,14 +124,15 @@
 
                 <TextView
                     android:id="@+id/tvCamera"
-                    style="@style/TextView_style_large"
+                    style="@style/ButtonText_style_Bg"
+                    android:background="@color/transparent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="@string/sell"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/roboto_bold"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textStyle="bold" />

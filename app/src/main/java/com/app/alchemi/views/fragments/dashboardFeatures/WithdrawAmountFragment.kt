@@ -34,10 +34,10 @@ class WithdrawAmountFragment: Fragment() {
         }
         /**
          *  back button functionality
-         */
-        requireActivity().ivBack.setOnClickListener {
-            (activity as HomeActivity).clearStack(1)
-        }
+//         */
+//        requireActivity().ivBack.setOnClickListener {
+//            (activity as HomeActivity).clearStack(1)
+//        }
     }
 
 
@@ -45,6 +45,7 @@ class WithdrawAmountFragment: Fragment() {
         super.onResume()
         requireActivity().tvTitle.text = getString(R.string.amount)
         requireActivity().tvTitle.visibility=View.VISIBLE
+        requireActivity().toolbar_title.visibility=View.GONE
         (activity as HomeActivity).tab_layout?.visibility=View.GONE
         requireActivity().ivBack.visibility=View.VISIBLE
         requireActivity().ivChat.visibility = View.GONE
@@ -88,10 +89,8 @@ class WithdrawAmountFragment: Fragment() {
         requireActivity().rlAcx.visibility = View.VISIBLE
         requireActivity().toolbar_title.text = getString(R.string.home)
         requireActivity().ivSettings.visibility=View.VISIBLE
-        requireActivity().ivBack.visibility=View.GONE
         requireActivity().ivScan.visibility=View.GONE
         requireActivity().ivChart.visibility=View.GONE
-
         super.onDestroyView()
     }
 }

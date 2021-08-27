@@ -3,20 +3,65 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
-    <TextView android:id="@+id/itemName"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_10dp"
+        android:paddingEnd="@dimen/_10dp"
+        android:paddingStart="@dimen/_10dp">
+
+    <TextView
+        android:id="@+id/itemName"
         style="@style/TextView_style"
         android:textSize="18sp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
+        android:textStyle="bold"
+        android:text=""
+        android:layout_centerVertical="true"
+        android:textColor="@color/black"
+        android:layout_marginTop="0dp"
+        />
+        <TextView
+            android:id="@+id/tvInterest"
+            style="@style/TextView_style"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_toEndOf="@+id/itemName"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_marginTop="0dp"
+            android:paddingTop="3dp"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:paddingBottom="3dp"
+            android:layout_marginStart="7dp"
+            android:background="@drawable/btn_bg_green"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"/>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tvDescription"
+        style="@style/TextView_style"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text=""
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="@color/black"
-        android:layout_marginTop="0dp"
-        android:padding="10dp" />
+        android:paddingEnd="@dimen/_10dp"
+        android:paddingStart="10dp"
+        android:paddingBottom="@dimen/_10dp"
+        android:textColor="@color/colorLightBlack"
+        android:layout_marginTop="0dp" />
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"

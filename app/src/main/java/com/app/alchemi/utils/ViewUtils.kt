@@ -1,22 +1,23 @@
 package com.app.alchemi.utils
 
 import Constants
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Point
-import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.provider.Settings.Secure
 import android.text.Spannable
 import android.text.SpannableString
+import android.text.format.DateFormat
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
-import android.text.style.StyleSpan
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
@@ -44,6 +45,7 @@ import java.math.RoundingMode
 import java.security.InvalidKeyException
 import java.security.NoSuchAlgorithmException
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import java.util.*
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
@@ -88,12 +90,21 @@ class ViewUtils {
 
             return widthHeight
         }
+
+        /***
+         *  get Hardware devices
+         */
+        @SuppressLint("HardwareIds")
+        fun getHardwareDeviceId(context: Context):String{
+            return Secure.getString(context.contentResolver, Secure.ANDROID_ID)
+        }
+
         /***
          *  Show KeyBoard
          */
 
         fun showSoftKeyboard(activity: Activity, editText: EditText) {
-            (activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+            (activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
                     .showSoftInput(editText, InputMethodManager.SHOW_FORCED)
         }
 
@@ -107,7 +118,7 @@ class ViewUtils {
 
         /**
          *
-         *  Check to recived screen Size
+         *  Check to received screen Size
          */
         private fun isScreenSizeRetrieved(widthHeight: IntArray): Boolean {
             return false
@@ -129,7 +140,7 @@ class ViewUtils {
         //opposite
 
         fun pxToDp(context: Context,dp: Int): Int {
-            val density: Float = context.getResources().getDisplayMetrics().density
+            val density: Float = context.resources.displayMetrics.density
             return Math.round(dp * density)
           //  return (px / (Resources.getSystem().displayMetrics.density)/DisplayMetrics.DENSITY_DEFAULT)
         }
@@ -289,14 +300,55 @@ class ViewUtils {
         }
 
         /***
+         * Down;load Image for cards
+         */
+        fun downloadImage(path_url: String, imageView: ImageView, context: Context) {
+            Glide.with(context)
+                .load(path_url)
+                .apply(
+                    RequestOptions()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .skipMemoryCache(false)
+                        .placeholder(R.drawable.order_card)
+
+                )
+
+                .listener(object : RequestListener<Drawable> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any,
+                        target: Target<Drawable>,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        imageView.visibility = View.VISIBLE
+                        return false
+                    }
+
+                    override fun onResourceReady(
+                        resource: Drawable,
+                        model: Any,
+                        target: Target<Drawable>,
+                        dataSource: DataSource,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        imageView.visibility = View.VISIBLE
+
+                        return false
+                    }
+                })
+
+                .into(imageView)
+        }
+
+        /***
          *  Change text color
          */
         fun changeTextColor(textView: TextView, text: String, color: Int, startLength: Int, endLength: Int, oneWord: Boolean){
             val spannable = SpannableString(text)
-            spannable.setSpan(RelativeSizeSpan(1.2f), startLength, endLength, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            spannable.setSpan(RelativeSizeSpan(1.3f), startLength, endLength, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             spannable.setSpan(ForegroundColorSpan(color), startLength, endLength, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             if (oneWord){
-                spannable.setSpan(RelativeSizeSpan(1.2f), endLength + 4, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                spannable.setSpan(RelativeSizeSpan(1.3f), endLength + 4, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                 spannable.setSpan(ForegroundColorSpan(color), endLength + 4, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             }
             textView.text = spannable
@@ -327,6 +379,29 @@ class ViewUtils {
                 e.printStackTrace()
             }
 
+        }
+
+        /***
+         *  Get Date from utc Time stamp
+         */
+        fun getDateFromUTCTimestamp(mTimestamp: Long, mDateFormate: String?): String? {
+            var date: String? = null
+            try {
+                val cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+                cal.timeInMillis = mTimestamp * 1000L
+                date = DateFormat.format(mDateFormate, cal.timeInMillis).toString()
+                val formatter = SimpleDateFormat(mDateFormate, Locale.ENGLISH)
+                val value = formatter.parse(date)
+                val dateFormatter = SimpleDateFormat(mDateFormate, Locale.ENGLISH)
+                dateFormatter.timeZone = TimeZone.getDefault()
+                date = dateFormatter.format(value)
+
+                return date
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+            return date
         }
 
         /**

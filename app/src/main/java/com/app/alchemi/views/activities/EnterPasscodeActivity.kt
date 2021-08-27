@@ -77,6 +77,11 @@ class EnterPasscodeActivity : AppCompatActivity() {
             })
         }
     }
+
+    /**
+     *  APT to get Forgot Passcode API
+     *
+     */
     fun forgotPassCode(){
         ViewUtils.hideKeyBoard(this)
         if (!ViewUtils.verifyAvailableNetwork(this)) {

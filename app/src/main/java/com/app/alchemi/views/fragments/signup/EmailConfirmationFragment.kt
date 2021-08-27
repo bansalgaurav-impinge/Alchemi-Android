@@ -19,6 +19,10 @@ import com.app.alchemi.utils.ViewUtils
 import com.app.alchemi.utils.navigateTo
 import com.app.alchemi.viewModel.EmailConfirmationRequestViewModel
 import com.app.alchemi.views.activities.HomeActivity
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
+//import com.google.android.gms.tasks.OnCompleteListener
+//import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.email_confirmation_layout.*
 import kotlinx.android.synthetic.main.email_confirmation_layout.llBottoms
 import kotlinx.android.synthetic.main.toolbar_layout.*
@@ -26,6 +30,7 @@ import kotlinx.android.synthetic.main.toolbar_layout.*
 
 class EmailConfirmationFragment: Fragment() {
     internal lateinit var emailConfirmationRequestViewModel: EmailConfirmationRequestViewModel
+    var fcmToken=""
 
     companion object {
         fun newInstance() = EmailConfirmationFragment()
@@ -46,7 +51,7 @@ class EmailConfirmationFragment: Fragment() {
 
         emailConfirmationRequestViewModel = ViewModelProvider(this).get(EmailConfirmationRequestViewModel::class.java)
         /**
-         * listner
+         * listener
          */
         tvOpenEmail.setOnClickListener {
 
@@ -83,6 +88,7 @@ class EmailConfirmationFragment: Fragment() {
     override fun onResume() {
         super.onResume()
         Constants.EMAIL= AlchemiApplication.alchemiApplication?.getEmail().toString()
+        firebaseToken()
     }
 
     /*****
@@ -101,11 +107,17 @@ class EmailConfirmationFragment: Fragment() {
         if (!ViewUtils.verifyAvailableNetwork(requireContext())) {
             ViewUtils.showSnackBar(cl_parent,getString(R.string.you_re_not_connected_to_the_internet_n_please_connect_and_retry))
         }
+        else if (fcmToken.isEmpty()){
+            firebaseToken()
+        }
         else {
             ViewUtils.showProgress(requireContext())
             ViewUtils.showProgress(requireContext())
             val hashMap= HashMap<String,String>()
             hashMap[Constants.KEY_EMAIL]=Constants.EMAIL
+            hashMap[Constants.KEY_DEVICE_ID]=""+Constants.getDeviceID(requireContext())
+            hashMap[Constants.KEY_DEVICE_TOKEN]=""+fcmToken
+            hashMap[Constants.KEY_DEVICE_TYPE]=Constants.DEVICE_NAME
             hashMap[Constants.KEY_REDIRECT_URL]=Constants.APP_URL.trim()
             emailConfirmationRequestViewModel.getEmailConfimationRequest(hashMap, view)!!.observe(viewLifecycleOwner, Observer { emailConfirmationRequestModel ->
                 ViewUtils.dismissProgress()
@@ -121,5 +133,22 @@ class EmailConfirmationFragment: Fragment() {
         }
     }
 
+    /***
+     *  Firebase token
+     */
+    fun firebaseToken(){
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.e( "FCM Token", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            fcmToken=task.result
+            // Log and toast
+            Log.d("FCM Token", task.result)
+
+        })
+    }
 
 }

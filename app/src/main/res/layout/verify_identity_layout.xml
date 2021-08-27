@@ -48,7 +48,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:layout_marginTop="15dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="15dp"
                     android:text="@string/account_opening_description" />
                 <include layout="@layout/recyclerview_layout" />
             </LinearLayout>

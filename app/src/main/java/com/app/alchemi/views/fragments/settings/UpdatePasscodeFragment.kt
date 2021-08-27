@@ -87,19 +87,19 @@ class UpdatePasscodeFragment : Fragment() {
             ViewUtils.showSnackBar(view, getString(R.string.enter_your_old_passcode))
         }
         else if (pin.isEmpty()) {
-            ViewUtils.showSnackBar(scrollView, getString(R.string.enter_your_new_passcode))
+            ViewUtils.showSnackBar(view, getString(R.string.enter_your_new_passcode))
         } else if (confirmPin.isEmpty()) {
-            ViewUtils.showSnackBar(scrollView, getString(R.string.enter_your_confirm_passcode))
+            ViewUtils.showSnackBar(view, getString(R.string.enter_your_confirm_passcode))
         }
         else if (pin!=confirmPin) {
-            ViewUtils.showSnackBar(scrollView, getString(R.string.new_passcode_and_confirm_passcode_is_mismatched))
+            ViewUtils.showSnackBar(view, getString(R.string.new_passcode_and_confirm_passcode_is_mismatched))
         }
         else if (pin.length<6){
-            ViewUtils.showSnackBar(scrollView,getString(R.string.pin_should_be_six_digits))
+            ViewUtils.showSnackBar(view,getString(R.string.pin_should_be_six_digits))
         }
          else if (AlchemiApplication.alchemiApplication?.getPassCode()!=null &&AlchemiApplication.alchemiApplication?.getPassCode()!="null" && (""+AlchemiApplication.alchemiApplication?.getPassCode()).isNotEmpty()){
             if (oldPin.toInt()!=AlchemiApplication.alchemiApplication?.getPassCode()?.toInt()){
-                ViewUtils.showSnackBar(scrollView, getString(R.string.incorrect_old_passcode)
+                ViewUtils.showSnackBar(view, getString(R.string.incorrect_old_passcode)
                 )
             }else{
                 hitApi(pin.trim())
@@ -214,7 +214,6 @@ class UpdatePasscodeFragment : Fragment() {
         (activity as HomeActivity).tab_layout?.visibility= View.GONE
         requireActivity().toolbar_title.text  = getString(R.string.change_passcode)
         requireActivity().toolbar_title.gravity= Gravity.LEFT
-        requireActivity().ivBack.setImageResource(R.drawable.ic_back)
         requireActivity().ivChat.visibility= View.GONE
         requireActivity().rlAcx.visibility= View.GONE
     }

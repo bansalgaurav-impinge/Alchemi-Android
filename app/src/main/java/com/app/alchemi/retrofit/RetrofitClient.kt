@@ -2,8 +2,7 @@ package com.app.alchemi.retrofit
 
 import androidx.multidex.BuildConfig
 import com.google.gson.GsonBuilder
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -38,9 +37,4 @@ object RetrofitClient {
             .create(ApiInterface::class.java)
     }
 
-    val token
-        get() = apiInterface.getLinkToken()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map { it.link_token }
 }

@@ -19,17 +19,18 @@
             android:padding="5dp">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="0dp"
                 android:padding="15dp"
-                style="@style/TextView_style_large"
+                style="@style/ButtonText_style_Bg"
+                android:background="@color/transparent"
                 android:layout_centerVertical="true"
                 android:text="@string/transfer"
+                android:layout_centerInParent="true"
                 android:textAlignment="center"
                 android:includeFontPadding="true"
-                android:fontFamily="@font/roboto_medium"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
             <ImageView
@@ -78,12 +79,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="5dp"
-                    style="@style/TextView_style_large"
+                    style="@style/ButtonText_style_Bg"
+                    android:background="@color/transparent"
                     android:text="@string/deposit"
                     android:textAlignment="center"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/roboto_bold"
                     android:textColor="@color/black" />
             </LinearLayout>
             <LinearLayout
@@ -121,16 +123,17 @@
 
                 <TextView
                     android:id="@+id/tvCamera"
-                    style="@style/TextView_style_large"
+                    style="@style/ButtonText_style_Bg"
+                    android:background="@color/transparent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="@string/withdraw"
+                    android:fontFamily="@font/roboto_bold"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/roboto_medium"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>

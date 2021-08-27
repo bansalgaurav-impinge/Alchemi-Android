@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Typeface
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.text.Spannable
@@ -20,6 +21,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -143,8 +145,15 @@ class ACXPayFragment: Fragment() {
 
     fun changeTextColor(textView: TextView, text: String, color: Int, startLength: Int, endLength: Int, startLength2: Int, endLength2: Int) {
         val spannable = SpannableString(text)
-        spannable.setSpan(RelativeSizeSpan(1.2f), startLength, endLength, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        spannable.setSpan(RelativeSizeSpan(1.2f), startLength2, endLength2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannable.setSpan(RelativeSizeSpan(1.25f), startLength, endLength, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannable.setSpan(RelativeSizeSpan(1.25f), startLength2, endLength2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        val font =ResourcesCompat.getFont(requireContext(), R.font.roboto_bold)
+//        val font = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            requireContext().resources.getFont(R.font.roboto_bold)
+//        }
+        spannable.setSpan(StyleSpan(Typeface.BOLD), startLength, endLength, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannable.setSpan(font,startLength, endLength,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannable.setSpan(font,startLength2, endLength2,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         spannable.setSpan(StyleSpan(Typeface.BOLD), startLength, endLength, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         spannable.setSpan(StyleSpan(Typeface.BOLD), startLength2, endLength2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         spannable.setSpan(ForegroundColorSpan(color), startLength, endLength, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)

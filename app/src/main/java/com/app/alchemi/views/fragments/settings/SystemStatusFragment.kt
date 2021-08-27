@@ -33,15 +33,15 @@ class SystemStatusFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         updateNotificationStatusViewModel = ViewModelProvider(this).get(UpdateNotificationStatusViewModel::class.java)
 
-        try {
-            if (activity!=null) {
-                (activity as HomeActivity).ivBack.setOnClickListener {
-                    (activity as HomeActivity).onBackPressed()
-                }
-            }
-        }catch (e: Exception){
-            e.printStackTrace()
-        }
+//        try {
+//            if (activity!=null) {
+//                (activity as HomeActivity).ivBack.setOnClickListener {
+//                    (activity as HomeActivity).onBackPressed()
+//                }
+//            }
+//        }catch (e: Exception){
+//            e.printStackTrace()
+//        }
 
 
     }
@@ -51,7 +51,6 @@ class SystemStatusFragment: Fragment() {
         (activity as HomeActivity).tab_layout?.visibility= View.GONE
         requireActivity().toolbar_title.text  = getString(R.string.system_status)
         requireActivity().toolbar_title.gravity= Gravity.START
-        requireActivity().ivBack.setImageResource(R.drawable.ic_back)
         requireActivity().ivChat.visibility= View.GONE
         requireActivity().rlAcx.visibility= View.GONE
         checkSystemStatus()

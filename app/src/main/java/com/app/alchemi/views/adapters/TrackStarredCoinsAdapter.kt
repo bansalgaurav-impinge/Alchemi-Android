@@ -1,6 +1,8 @@
 package com.app.alchemi.views.adapters
 
+import android.app.Activity
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +12,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.alchemi.R
 import com.app.alchemi.models.TopGainer
 import com.app.alchemi.utils.ViewUtils
+import com.app.alchemi.views.activities.HomeActivity
+import com.app.alchemi.views.fragments.dashboardFeatures.CoinDetailFragment
 import kotlinx.android.synthetic.main.card_track_coin_adapter.view.*
 
 import java.math.RoundingMode
 
 
 internal class TrackStarredCoinsAdapter(
-        starredList: List<TopGainer>) : RecyclerView.Adapter<TrackStarredCoinsAdapter.ViewHolder>() {
+    starredList: List<TopGainer>) : RecyclerView.Adapter<TrackStarredCoinsAdapter.ViewHolder>() {
     val starredList: List<TopGainer> = starredList
     private var mContext: Context? = null
 
@@ -28,9 +32,7 @@ internal class TrackStarredCoinsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.setIsRecyclable(false)
         holder.itemView.tvCoin.text=starredList[position].FULLNAME
-
-            holder.itemView.tvCoinName.text = starredList[position].FROMSYMBOL
-
+        holder.itemView.tvCoinName.text = starredList[position].FROMSYMBOL
         val d=starredList[position].CHANGEPCT24HOUR
         val rounded = d.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()
         holder.itemView.tvNumber.visibility=View.VISIBLE
@@ -48,6 +50,20 @@ internal class TrackStarredCoinsAdapter(
 
         }
         holder.itemView.animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.item_animation)
+
+        /**
+         *  click get detail screen
+         */
+        holder.itemView.setOnClickListener {
+            val  bundle= Bundle()
+            bundle.putSerializable(Constants.KEY_TITLE, starredList[position].FULLNAME)
+            bundle.putSerializable(Constants.KEY_DESCRIPTION, starredList[position].FROMSYMBOL)
+            bundle.putSerializable(Constants.KEY_PRICE, starredList[position].PRICE)
+            bundle.putSerializable(Constants.KEY_PRICE_VARIATIONS, starredList[position].CHANGEPCT24HOUR.toDouble())
+            bundle.putSerializable(Constants.KEY_RANK, (position+1))
+            val activity = mContext as Activity
+            (activity as HomeActivity).replaceFragment(CoinDetailFragment(), "" + CoinDetailFragment, bundle)
+        }
 
     }
 

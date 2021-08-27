@@ -84,6 +84,7 @@
         </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/rlRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/card_bg"
@@ -91,6 +92,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="230dp"
+                android:paddingBottom="@dimen/_20dp"
                 android:layout_marginBottom="@dimen/_10dp">
                 <include layout="@layout/recycler_view" />
             </RelativeLayout>
@@ -100,22 +102,24 @@
                 android:id="@+id/rlBottom"
                 style="@style/editText_style"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:gravity="bottom"
                 android:layout_alignParentBottom="true">
 
                 <EditText
                     android:id="@+id/etMessage"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
                     android:layout_toStartOf="@+id/ivSend"
                     android:background="@null"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     android:maxLength="200"
                     android:maxLines="5"
+                    android:maxHeight="150dp"
+                    android:singleLine="false"
                     android:hint="@string/write_your_message_here"
                     android:text="" />
 
@@ -124,9 +128,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
                     android:contentDescription="@string/app_name"
                     android:padding="1dp"
+                    android:foregroundGravity="bottom"
                     android:src="@drawable/ic_send"
                     app:tint="@color/colorDarkGrey"/>
             </RelativeLayout>

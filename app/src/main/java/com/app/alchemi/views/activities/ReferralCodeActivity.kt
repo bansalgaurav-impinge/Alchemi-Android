@@ -30,7 +30,7 @@ class ReferralCodeActivity: AppCompatActivity() {
             checkReferralCode()
 
         }
-        etReferralCode.setText("eb63d8")
+       // etReferralCode.setText("eb63d8")
 
     }
 

@@ -27,8 +27,7 @@ internal class FlexibleAssetsAdapter(
         holder.itemView.tvCoinAmount.text=topGainersList[position][Constants.KEY_LAST_NAME]
         holder.itemView.tvCoinAmount.textSize=12f
         if (position==0){
-            holder.itemView.tvCoinAmount.setBackgroundResource(R.drawable.fill_btn_bg)
-            holder.itemView.tvCoinAmount.background.setTint(ContextCompat.getColor(mContext!!,R.color.colorGreen))
+            holder.itemView.tvCoinAmount.setBackgroundResource(R.drawable.btn_bg_green)
             holder.itemView.tvCoinAmount.setTextColor(ContextCompat.getColor(mContext!!,R.color.white))
         }
         if (position==topGainersList.size-1){

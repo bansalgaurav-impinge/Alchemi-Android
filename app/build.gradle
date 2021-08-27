@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -40,8 +41,8 @@ ext {
 }
 
 dependencies {
-    implementation 'androidx.navigation:navigation-fragment:2.3.5'
-    implementation 'androidx.navigation:navigation-ui:2.3.5'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     def nav_version = "2.3.5"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -113,7 +114,13 @@ dependencies {
 
     implementation 'com.budiyev.android:code-scanner:2.1.0'
 
+    implementation 'org.greenrobot:eventbus:3.2.0'
+// Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:28.4.0')
 
-
-
+    // Declare the dependencies for the Firebase Cloud Messaging and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 }
+//apply plugin: 'com.google.gms.google-services'

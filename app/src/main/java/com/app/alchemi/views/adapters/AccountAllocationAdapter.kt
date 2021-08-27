@@ -28,10 +28,12 @@ internal class AccountAllocationAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.setIsRecyclable(false)
         holder.itemView.tvCoin.text=topGainersList[position][Constants.KEY_FIRST_NAME]
+        holder.itemView.view.visibility=View.VISIBLE
         if (position==0){
             holder.itemView.cl_parent.background=ContextCompat.getDrawable(mContext!!,R.drawable.allocation_card_bg)
         }
         if (position==topGainersList.size-1){
+            holder.itemView.view.visibility=View.GONE
             holder.itemView.cl_parent.background=ContextCompat.getDrawable(mContext!!,R.drawable.allocation_card_bg_bottom)
         }
 

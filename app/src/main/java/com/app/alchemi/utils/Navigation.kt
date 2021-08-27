@@ -10,7 +10,7 @@ import com.app.alchemi.views.fragments.dashboardFeatures.AmountFragment
 import com.app.alchemi.views.fragments.dashboardFeatures.QRCodeFragment
 
 enum class Target {
-    START,REFERRAL_CODE,SIGN_UP_EMAIL,ACX_PAY,NOTIFICATIONS,AMOUNT
+    START,REFERRAL_CODE,SIGN_UP_EMAIL,ACX_PAY,NOTIFICATIONS,AMOUNT,PLAID,ADD_PAYMENT_METHOD,ADD_CARD_DETAIL
 }
 
     /**
@@ -61,5 +61,8 @@ enum class Target {
             Target.ACX_PAY->Intent(context,QRCodeFragment::class.java)
             Target.NOTIFICATIONS->Intent(context,NotificationsActivity::class.java)
             Target.AMOUNT->Intent(context,AmountFragment::class.java)
+            Target.PLAID->Intent(context,PlaidActivity::class.java)
+            Target.ADD_PAYMENT_METHOD->Intent(context,AddPaymentMethodActivity::class.java)
+            Target.ADD_CARD_DETAIL->Intent(context,AddCardDetailActivity::class.java)
     }
 }

@@ -2,8 +2,10 @@ package com.app.alchemi.views.fragments.dashboardFeatures
 
 import Constants
 import android.os.Bundle
+import android.text.Editable
 import android.text.Spannable
 import android.text.SpannableString
+import android.text.TextWatcher
 import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
@@ -11,21 +13,33 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.alchemi.R
+import com.app.alchemi.interfaceintercation.OnItemClickListener
+import com.app.alchemi.models.TopGainer
+import com.app.alchemi.utils.AlchemiApplication
 import com.app.alchemi.utils.ViewUtils
 import com.app.alchemi.viewModel.CoinHistoryViewModel
+import com.app.alchemi.viewModel.GetTopCryptoCurrencyViewModel
 import com.app.alchemi.views.activities.HomeActivity
+import com.app.alchemi.views.adapters.DepositCurrencyEarnAdapter
 import com.app.alchemi.views.adapters.EarnAdapter
-import com.app.alchemi.views.fragments.settings.WebViewFragment
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.alchemi_earns_terms_conditions_layout.*
+import kotlinx.android.synthetic.main.alchemi_earns_terms_conditions_layout.bottomSheet
+import kotlinx.android.synthetic.main.alchemi_earns_terms_conditions_layout.ivCrossIcon
+import kotlinx.android.synthetic.main.deposit_currency_bottom_sheet.*
 import kotlinx.android.synthetic.main.earn_fragment_layout.*
+import kotlinx.android.synthetic.main.earn_fragment_layout.rvList
+import kotlinx.android.synthetic.main.earn_fragment_layout.tvBalance
+import kotlinx.android.synthetic.main.earn_fragment_layout.tvTotalBalance
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import java.text.DecimalFormat
 import java.text.NumberFormat
@@ -34,10 +48,14 @@ import kotlin.collections.HashMap
 import kotlin.collections.set
 
 
-class EarnFragment: Fragment(){
+class EarnFragment: Fragment(), OnItemClickListener {
     private lateinit var coinHistoryViewModel: CoinHistoryViewModel
     private lateinit var earnAdapter: EarnAdapter
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
+    private lateinit var getCryptoCurrencyViewModel: GetTopCryptoCurrencyViewModel
+    private lateinit var depositCurrencyAdapter: DepositCurrencyEarnAdapter
+    var coinList: List<TopGainer>?=null
+    var dialog: BottomSheetDialog?=null
     companion object {
         fun newInstance() = EarnFragment()
     }
@@ -51,10 +69,12 @@ class EarnFragment: Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         coinHistoryViewModel = ViewModelProvider(this).get(CoinHistoryViewModel::class.java)
+        getCryptoCurrencyViewModel = ViewModelProvider(this).get(GetTopCryptoCurrencyViewModel::class.java)
+
         ViewUtils.showAnimation(context, tvTotalBalance, R.anim.slide_in_right)
         ViewUtils.showAnimation(context, tvBalance, R.anim.slide_in_right)
         var str="12568.90877"
-        val ft= DecimalFormat("##,###.00")
+        DecimalFormat("##,###.00")
         // str=ft.format(str)
         str = NumberFormat.getInstance().format(155568.90)
         ViewUtils.changeTextColor(tvTotalBalance, (str + " " + getString(R.string.aco)), ContextCompat.getColor(requireContext(), R.color.white), 0, (str + " " + getString(R.string.aco)).length - 4, false)
@@ -83,9 +103,9 @@ class EarnFragment: Fragment(){
         rvList?.adapter = earnAdapter
 
         (activity as HomeActivity).tab_layout?.visibility=View.VISIBLE
-        requireActivity().ivBack.setOnClickListener {
-            (activity as HomeActivity).clearStack(1)
-        }
+//        requireActivity().ivBack.setOnClickListener {
+//            (activity as HomeActivity).clearStack(1)
+//        }
         bottomSheet()
         /***
          *  click buttons
@@ -122,7 +142,7 @@ class EarnFragment: Fragment(){
 
     override fun onDestroyView() {
         requireActivity().ivBack.setImageResource(R.drawable.ic_back)
-        requireActivity().toolbar_title.text = getString(R.string.acx)
+        requireActivity().toolbar_title.text = getString(R.string.alchemi_capital_exchange)
         requireActivity().ivBack.visibility=View.VISIBLE
         requireActivity().ivScan.visibility=View.GONE
         requireActivity().ivChart.visibility=View.GONE
@@ -173,27 +193,27 @@ class EarnFragment: Fragment(){
      */
     private fun slideUpDownBottomSheetTermsConditions() {
         val dialogView = layoutInflater.inflate(R.layout.alchemi_earns_terms_conditions_layout, null)
-       val dialog = BottomSheetDialog(requireContext(),R.style.SheetDialog)
+        dialog = BottomSheetDialog(requireContext(),R.style.SheetDialog)
 
-        dialog.setContentView(dialogView)
+        dialog?.setContentView(dialogView)
         YoYo.with(Techniques.SlideInUp).duration(500).playOn(dialogView)
-        val ivClose = dialog.ivCrossIcon as ImageView
-        val ivBackIcon = dialog.ivBackIcon as ImageView
-        val llCheckbox = dialog.llCheckbox as LinearLayout
-        val llCheckbox_2 = dialog.llCheckbox_2 as LinearLayout
-        val llCheckbox_3 = dialog.llCheckbox_3 as LinearLayout
-        val llCheckbox_4 = dialog.llCheckbox_4 as LinearLayout
-        val tvCheckboxTxt=dialog.tvCheckboxTxt as TextView
-        val tvContinue=dialog.tvContinue as TextView
-        val checkboxTermsConditions=dialog.checkboxTermsConditions as CheckBox
-        val checkboxTermsConditions_2=dialog.checkboxTermsConditions_2 as CheckBox
-        val checkboxTermsConditions_3=dialog.checkboxTermsConditions_3 as CheckBox
-        val checkboxTermsConditions_4=dialog.checkboxTermsConditions_4 as CheckBox
+        val ivClose = dialog?.ivCrossIcon as ImageView
+        val ivBackIcon = dialog?.ivBackIcon as ImageView
+        val llCheckbox = dialog?.llCheckbox as LinearLayout
+        val llCheckbox_2 = dialog?.llCheckbox_2 as LinearLayout
+        val llCheckbox_3 = dialog?.llCheckbox_3 as LinearLayout
+        val llCheckbox_4 = dialog?.llCheckbox_4 as LinearLayout
+        val tvCheckboxTxt=dialog?.tvCheckboxTxt as TextView
+        val tvContinue=dialog?.tvContinue as TextView
+        val checkboxTermsConditions=dialog?.checkboxTermsConditions as CheckBox
+        val checkboxTermsConditions_2=dialog?.checkboxTermsConditions_2 as CheckBox
+        val checkboxTermsConditions_3=dialog?.checkboxTermsConditions_3 as CheckBox
+        val checkboxTermsConditions_4=dialog?.checkboxTermsConditions_4 as CheckBox
         changeTextColor(tvCheckboxTxt,getString(R.string.alchemi_earn_term_one),ContextCompat.getColor(requireContext(),R.color.colorGreen),70,getString(R.string.alchemi_earn_term_one).length)
 
         ivClose.setOnClickListener {
             YoYo.with(Techniques.SlideOutDown).duration(500).delay(500).playOn(dialogView)
-            dialog.dismiss()
+            dialog?.dismiss()
         }
         llCheckbox.setOnClickListener {
              checkboxTermsConditions.performClick()
@@ -208,17 +228,17 @@ class EarnFragment: Fragment(){
             checkboxTermsConditions_2.performClick()
         }
         ivBackIcon.setOnClickListener {
-            dialog.dismiss()
+            dialog?.dismiss()
         }
         tvContinue.setOnClickListener {
             if (checkboxTermsConditions.isChecked && checkboxTermsConditions_2.isChecked&& checkboxTermsConditions_3.isChecked&& checkboxTermsConditions_4.isChecked){
-                dialog.dismiss()
+                getCryptoCurrency(false)
             }else{
                 Toast.makeText(requireContext(),getString(R.string.please_select_terms_and_conditions),Toast.LENGTH_SHORT).show()
             }
         }
 
-        dialog.show()
+        dialog?.show()
 
     }
 
@@ -229,6 +249,120 @@ class EarnFragment: Fragment(){
         val spannable = SpannableString(text)
         spannable.setSpan(ForegroundColorSpan(color), startLength, endLength, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         textView.text = spannable
+    }
+
+    /***
+     *  get List of coin to buy
+     */
+    fun getCryptoCurrency(isSwipeRefresh: Boolean){
+        if (!ViewUtils.verifyAvailableNetwork(requireContext())) {
+            ViewUtils.showSnackBar(view, getString(R.string.you_re_not_connected_to_the_internet_n_please_connect_and_retry))
+        }
+        else {
+            ViewUtils.showProgress(requireContext())
+            getCryptoCurrencyViewModel.getTopCryptoCurrency(Constants.Token + AlchemiApplication.alchemiApplication?.getToken(), view)!!.observe(viewLifecycleOwner, Observer { homeModel ->
+                ViewUtils.dismissProgress()
+
+                if (homeModel.code == Constants.CODE_200) {
+                    if(homeModel.data.mktcapfull.isNotEmpty()) {
+                        dialog?.dismiss()
+                        slideUpDownBottomSheetDepositCurrency(homeModel.data.mktcapfull)
+                        }
+                } else {
+                    ViewUtils.showSnackBar(view, "" + homeModel.message)
+                }
+            })
+        }
+    }
+    /***
+     * Deposit Currency bottom sheet for earn
+     */
+    private fun slideUpDownBottomSheetDepositCurrency(mktcapfull: List<TopGainer>) {
+        val dialogView = layoutInflater.inflate(R.layout.deposit_currency_bottom_sheet, null)
+        dialog = BottomSheetDialog(requireContext(),R.style.SheetDialog)
+
+        dialog?.setContentView(dialogView)
+        YoYo.with(Techniques.SlideInUp).duration(500).playOn(dialogView)
+        val ivClose = dialog?.ivCrossIcon as ImageView
+        val etSearch = dialog?.etSearchCoin as EditText
+        val  tvCurrencyTitle= dialog?.tvCurrencyTitle as TextView
+        val  tvEarnCurrencyTitle= dialog?.tvEarnCurrencyTitle as TextView
+        val  tvEarnCurrency= dialog?.tvEarnCurrency as TextView
+
+        tvCurrencyTitle.text=getString(R.string.alchemi_earn)
+        etSearch.hint=getString(R.string.currency)
+        tvEarnCurrencyTitle.visibility=View.VISIBLE
+        tvEarnCurrency.visibility=View.VISIBLE
+
+        val rvList = dialog?.rvList as RecyclerView
+//        val bottomSheet= dialog.bottomSheet as LinearLayout
+        val metrics= resources.displayMetrics
+//        bottomSheetBehavior.peekHeight=metrics.heightPixels/3
+        val llm = LinearLayoutManager(context)
+        llm.orientation = LinearLayoutManager.VERTICAL
+        rvList?.layoutManager = llm
+        coinList=mktcapfull
+        depositCurrencyAdapter = DepositCurrencyEarnAdapter(mktcapfull,this)
+        rvList.adapter = depositCurrencyAdapter
+        depositCurrencyAdapter.notifyDataSetChanged()
+        /****
+         * To Search Coin
+         */
+
+        etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                try {
+                    if (coinList?.isNotEmpty() == true || coinList != null) {
+                        if (s.trim().isNotEmpty()) {
+                            var tempList = coinList!!.filter {
+                                it.FULLNAME
+                                    .startsWith(s.trim(), true)
+
+                            }
+
+                            depositCurrencyAdapter = DepositCurrencyEarnAdapter(tempList, EarnFragment())
+                            rvList.adapter = depositCurrencyAdapter
+                            depositCurrencyAdapter.notifyDataSetChanged()
+
+                        } else {
+                            depositCurrencyAdapter = DepositCurrencyEarnAdapter(coinList!!, EarnFragment())
+                            rvList.adapter = depositCurrencyAdapter
+                            depositCurrencyAdapter.notifyDataSetChanged()
+
+                        }
+                    }
+                }catch (e: Exception){
+                    e.printStackTrace()
+                }
+
+            }
+        })
+
+        ivClose.setOnClickListener {
+            YoYo.with(Techniques.SlideOutDown).duration(500).delay(500).playOn(dialogView)
+            etSearch.text.clear()
+            ViewUtils.hideKeyBoard(requireActivity())
+            dialog?.dismiss()
+        }
+
+
+        dialog?.show()
+
+    }
+
+    override fun getItemClicked(itemId: String?) {
+        dialog?.dismiss()
+        val bundle = Bundle()
+        (activity as HomeActivity).replaceFragment(StakingPeriodFragment(), "" + StakingPeriodFragment, bundle)
+
     }
 }
 

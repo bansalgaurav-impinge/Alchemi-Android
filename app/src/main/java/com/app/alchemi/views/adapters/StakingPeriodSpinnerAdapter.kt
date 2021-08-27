@@ -1,6 +1,7 @@
 package com.app.alchemi.views.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,9 @@ internal class StakingPeriodSpinnerAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.itemName.text= optionList?.get(position).name
+        holder.itemView.itemName.text= optionList[position].name
+        holder.itemView.tvInterest.text= optionList[position].interest
+        holder.itemView.tvDescription.text= optionList[position].description
         holder.itemView.animation = AnimationUtils.loadAnimation(mContext, R.anim.item_animation)
         if (optionList[position].name==Constants.KEY_SELECTED_SPINNER_VALUE){
             holder.itemView.itemName.setTextColor(ContextCompat.getColor(mContext!!,R.color.colorYellow))

@@ -42,10 +42,12 @@
             android:hint="@string/search_coin"
             android:drawableEnd="@drawable/ic_search"
             android:maxLength="25"
+            android:textSize="16sp"
             android:digits="qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM"
             android:imeOptions="actionDone"
+            android:paddingEnd="20dp"
             android:inputType="textPersonName|textCapSentences"
-            android:autofillHints="" />
+            android:autofillHints="@string/search_coin" />
     </LinearLayout>
     </RelativeLayout>
     <LinearLayout

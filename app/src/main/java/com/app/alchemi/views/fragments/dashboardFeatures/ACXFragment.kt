@@ -38,9 +38,9 @@ class ACXFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkUserPinViewModel = ViewModelProvider(this).get(CheckUserPinViewModel::class.java)
-        requireActivity().ivBack.setOnClickListener {
-            (activity as HomeActivity).selectPage(0)
-        }
+//        requireActivity().ivBack.setOnClickListener {
+//            (activity as HomeActivity).selectPage(0)
+//        }
 
         val  hash=HashMap<String, String>()
         hash[Constants.KEY_FIRST_NAME]=getString(R.string.alchemi_wallet)

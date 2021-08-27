@@ -36,15 +36,15 @@ class NotificationSettingsFragment: Fragment() {
         switchNotificationSettings.setOnCheckedChangeListener { buttonView, isChecked ->
             updateNotificationSettingsStatus(isChecked)
         }
-        try {
-            if (activity!=null) {
-                (activity as HomeActivity).ivBack.setOnClickListener {
-                    (activity as HomeActivity).onBackPressed()
-                }
-            }
-        }catch (e: Exception){
-            e.printStackTrace()
-        }
+//        try {
+//            if (activity!=null) {
+//                (activity as HomeActivity).ivBack.setOnClickListener {
+//                    (activity as HomeActivity).onBackPressed()
+//                }
+//            }
+//        }catch (e: Exception){
+//            e.printStackTrace()
+//        }
 
 
     }
@@ -54,7 +54,6 @@ class NotificationSettingsFragment: Fragment() {
         (activity as HomeActivity).tab_layout?.visibility= View.GONE
         requireActivity().toolbar_title.text  = getString(R.string.notification_settings)
         requireActivity().toolbar_title.gravity= Gravity.START
-        requireActivity().ivBack.setImageResource(R.drawable.ic_back)
         requireActivity().ivChat.visibility= View.GONE
         requireActivity().rlAcx.visibility= View.GONE
 

@@ -1,6 +1,8 @@
 package com.app.alchemi.views.adapters
 
+import android.app.Activity
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.alchemi.R
 import com.app.alchemi.models.TopGainer
 import com.app.alchemi.utils.ViewUtils
+import com.app.alchemi.views.activities.HomeActivity
+import com.app.alchemi.views.fragments.dashboardFeatures.CoinDetailFragment
 import kotlinx.android.synthetic.main.card_track_coin_adapter.view.*
 import java.math.RoundingMode
 
@@ -45,6 +49,20 @@ internal class TrackAllCoinsAdapter(
 
         }
         holder.itemView.animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.item_animation)
+
+        /**
+         *  click get detail screen
+         */
+        holder.itemView.setOnClickListener {
+            val  bundle= Bundle()
+            bundle.putSerializable(Constants.KEY_TITLE, topGainersList[position].FULLNAME)
+            bundle.putSerializable(Constants.KEY_DESCRIPTION, topGainersList[position].FROMSYMBOL)
+            bundle.putSerializable(Constants.KEY_PRICE, topGainersList[position].PRICE)
+            bundle.putSerializable(Constants.KEY_PRICE_VARIATIONS, topGainersList[position].CHANGEPCT24HOUR)
+            bundle.putSerializable(Constants.KEY_RANK, (position+1))
+            val activity = mContext as Activity
+            (activity as HomeActivity).replaceFragment(CoinDetailFragment(), "" + CoinDetailFragment, bundle)
+        }
 
 
     }

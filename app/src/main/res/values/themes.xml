@@ -9,6 +9,7 @@
         <item name="colorSecondary">@color/colorYellow</item>
         <item name="colorSecondaryVariant">@color/colorYellow</item>
         <item name="colorOnSecondary">@color/black</item>
+
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
 <!--       //  Customize your theme here. -->
@@ -79,6 +80,15 @@
         <item name="android:textAlignment">center</item>
         <item name="android:background">@drawable/fill_btn_bg</item>
     </style>
+    <style name="ButtonText_style_Bg" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">21sp</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+        <item name="background">@android:color/transparent</item>
+        <item name="fontFamily">@font/roboto_bold</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
 
     <style name="ButtonText_style" parent="Widget.AppCompat.Button">
         <item name="android:textColor">@color/colorYellow</item>
@@ -137,6 +147,12 @@
         <item name="colorAccent">@color/colorGreen</item> <!-- for checked state -->
         <item name="colorControlNormal">@color/colorDarkGrey</item> <!-- for unchecked state -->
     </style>
-
+    <style name="MyProgressBarTwo" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="colorButtonNormal">@color/colorLightBlack</item>
+        <item name="colorControlActivated">@color/colorLightBlack</item>
+        <item name="colorControlHighlight">@color/colorYellow</item>
+        <item name="android:progressDrawable">@drawable/progress_bar_bg</item>
+        <item name="android:minWidth">200dp</item>
+    </style>
 
 </resources>

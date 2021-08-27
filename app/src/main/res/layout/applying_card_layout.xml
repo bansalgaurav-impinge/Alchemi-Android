@@ -37,6 +37,7 @@
                android:textColor="@color/black"
                android:text="@string/you_are_applying_for" />
             <ImageView
+                android:id="@+id/ivCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -307,6 +308,7 @@
                     android:layout_gravity="center_vertical|end"
                     android:layout_weight="0.6">
                     <ImageView
+                        android:id="@+id/ivCardStatus"
                         android:layout_width="@dimen/_20dp"
                         android:layout_height="@dimen/_20dp"
                         android:src="@drawable/check"
@@ -315,6 +317,7 @@
                         android:layout_gravity="center_vertical"
                         android:contentDescription="@string/app_name"/>
                     <TextView
+                        android:id="@+id/tvCardStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/shipped"

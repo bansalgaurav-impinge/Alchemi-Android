@@ -135,16 +135,16 @@ class TrackFragment: Fragment(),OnItemClickListener {
                 llmTrackStarredCoins.orientation)
         dividerItemDecoration1.setDrawable(getDrawable(requireContext(),R.drawable.divider)!!)
         rvStarredList.addItemDecoration(dividerItemDecoration1)
-        try {
-            if (activity!=null) {
-                (activity as HomeActivity).ivBack.setOnClickListener {
-                    //  SettingsFragment
-                    (activity as HomeActivity).selectPage(0)
-                }
-            }
-        }catch (e: Exception){
-            e.printStackTrace()
-        }
+//        try {
+//            if (activity!=null) {
+//                (activity as HomeActivity).ivBack.setOnClickListener {
+//                    //  SettingsFragment
+//                    (activity as HomeActivity).selectPage(0)
+//                }
+//            }
+//        }catch (e: Exception){
+//            e.printStackTrace()
+//        }
         searchCoinByName(view)
        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         val globalLayoutListener = ViewTreeObserver.OnGlobalLayoutListener {

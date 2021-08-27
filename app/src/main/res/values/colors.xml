@@ -5,7 +5,7 @@
     <color name="colorGreen">#149733</color>
     <color name="colorYellow">#ffb404</color>
     <color name="colorGrey">#dadada</color>
-    <color name="colorLightBlack">#1e1e1e</color>
+    <color name="colorLightBlack">#111111</color>
     <color name="colorTabText">#7f7f7f</color>
     <color name="colorRed">#a62426</color>
     <color name="colorCream">#CCD1D1</color>
@@ -20,6 +20,7 @@
     <color name="colorBottomSheetBg">#f0f0f0</color>
     <color name="colorBottomSheetSearchView">#e6e6e6</color>
     <color name="colorLightYellow">#fdeec5</color>
+    <color name="colorDivider">#1e1e1e</color>
 
     //pie chart colors.
 

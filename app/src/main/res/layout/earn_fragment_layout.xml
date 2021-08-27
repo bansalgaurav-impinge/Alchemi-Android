@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:focusable="true"
+    android:clickable="true"
+    android:background="@drawable/app_bg"
+    android:layout_marginBottom="40dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:clickable="true"
     android:focusable="true"
@@ -423,11 +431,13 @@
                     android:includeFontPadding="true"
                     android:layout_centerVertical="true" />
             </RelativeLayout>
-            <androidx.coordinatorlayout.widget.CoordinatorLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="@dimen/_20dp">
-            <include layout="@layout/alchemi_earns_terms_conditions_layout"/>
-            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+<!--            <androidx.coordinatorlayout.widget.CoordinatorLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:minHeight="@dimen/_20dp">-->
+<!--            <include layout="@layout/alchemi_earns_terms_conditions_layout"/>-->
+<!--            </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
         </LinearLayout>
 </androidx.core.widget.NestedScrollView>
+    <include layout="@layout/alchemi_earns_terms_conditions_layout"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

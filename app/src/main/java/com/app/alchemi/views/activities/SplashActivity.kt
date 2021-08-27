@@ -1,5 +1,6 @@
 package com.app.alchemi.views.activities
 
+import Constants
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -7,7 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-
+import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
@@ -18,7 +19,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.app.alchemi.R
 import com.app.alchemi.utils.AlchemiApplication
-import com.app.alchemi.utils.ViewUtils
 import com.app.alchemi.viewModel.UserDetailViewModel
 import kotlinx.android.synthetic.main.activity_splash.*
 
@@ -43,6 +43,7 @@ class SplashActivity: AppCompatActivity() {
         imageAppLogoText.startAnimation(animfadeout)
 
         landingScreen()
+
     }
 
 
@@ -91,9 +92,6 @@ class SplashActivity: AppCompatActivity() {
     }
     fun getUserDetail():Boolean{
         var lockScreenEnable=false
-        if (!ViewUtils.verifyAvailableNetwork(this)) {
-        }
-        else {
             userDetailViewModel.getUserDetail(Constants.Token+ AlchemiApplication.alchemiApplication?.getToken(),cl_layout)!!.observe(this, Observer { userDetailModel ->
                 if (userDetailModel.code==Constants.CODE_200) {
                     if (userDetailModel.data.pin!=null &&userDetailModel.data.pin!="null") {
@@ -107,7 +105,5 @@ class SplashActivity: AppCompatActivity() {
 
             })
             return lockScreenEnable
-        }
-       return lockScreenEnable
     }
 }

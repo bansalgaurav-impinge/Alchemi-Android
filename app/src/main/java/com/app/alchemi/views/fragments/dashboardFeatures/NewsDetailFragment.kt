@@ -27,7 +27,6 @@ class NewsDetailFragment: Fragment() {
         super.onResume()
         (activity as HomeActivity).tab_layout?.visibility=View.GONE
         requireActivity().toolbar_title.text  = getString(R.string.new_detail)
-        requireActivity().ivBack.setImageResource(R.drawable.ic_back)
         requireActivity().ivBack.visibility=View.VISIBLE
         requireActivity().ivChat.visibility=View.GONE
         requireActivity().rlAcx.visibility=View.GONE
@@ -47,7 +46,6 @@ class NewsDetailFragment: Fragment() {
         (activity as HomeActivity).ivChat.visibility = View.VISIBLE
         (activity as HomeActivity).rlAcx.visibility = View.VISIBLE
         (activity as HomeActivity).toolbar_title.text = getString(R.string.home)
-        (activity as HomeActivity).ivBack.setImageResource(R.drawable.setting)
         requireActivity().ivSettings.visibility=View.VISIBLE
         requireActivity().ivBack.visibility=View.GONE
         super.onDestroyView()

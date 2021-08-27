@@ -36,15 +36,15 @@ class PasscodeSettingsFragment: Fragment() {
             updatePassCodeSettingsStatus(isChecked)
         }
 
-        try {
-            if (activity!=null) {
-                (activity as HomeActivity).ivBack.setOnClickListener {
-                    (activity as HomeActivity).onBackPressed()
-                }
-            }
-        }catch (e: Exception){
-            e.printStackTrace()
-        }
+//        try {
+//            if (activity!=null) {
+//                (activity as HomeActivity).ivBack.setOnClickListener {
+//                    (activity as HomeActivity).onBackPressed()
+//                }
+//            }
+//        }catch (e: Exception){
+//            e.printStackTrace()
+//        }
 
 
     }
@@ -73,8 +73,7 @@ class PasscodeSettingsFragment: Fragment() {
     fun updatePassCodeSettingsStatus(isChecked:Boolean) {
         if (!ViewUtils.verifyAvailableNetwork(requireContext())) {
             ViewUtils.showSnackBar(
-                view,
-                getString(R.string.you_re_not_connected_to_the_internet_n_please_connect_and_retry)
+                view, getString(R.string.you_re_not_connected_to_the_internet_n_please_connect_and_retry)
             )
         } else {
             val hashMap = HashMap<String, Boolean>()

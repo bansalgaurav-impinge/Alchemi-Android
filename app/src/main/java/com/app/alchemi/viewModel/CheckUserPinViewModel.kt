@@ -31,9 +31,26 @@ internal class CheckUserPinViewModel : ViewModel() {
         mutableLiveData = MainActivityRepository.addRemoveFavouriteCOIN(hashMap, view, token,requestType)
         return mutableLiveData
     }
-
-
-
+    fun getOrExchangeAccessToken(hashMap: HashMap<String, String>, view: View?,token:String): LiveData<EmailConfirmationRequestModel>? {
+        mutableLiveData = MainActivityRepository.getOrExchangeAccessToken(hashMap, view, token)
+        return mutableLiveData
+    }
+    fun activateOrDeactivateCard(hashMap: HashMap<String, String>, view: View?,token:String): LiveData<EmailConfirmationRequestModel>? {
+        mutableLiveData = MainActivityRepository.activateOrDeactivate(hashMap, view, token)
+        return mutableLiveData
+    }
+    fun activateOrDeactivateStakeStatus(hashMap: HashMap<String, String>, view: View?,token:String): LiveData<EmailConfirmationRequestModel>? {
+        mutableLiveData = MainActivityRepository.activateOrDeactivateStakeStatus(hashMap, view, token)
+        return mutableLiveData
+    }
+    fun updateCoinNotifications(hashMap: HashMap<String, String>, view: View?,token:String): LiveData<EmailConfirmationRequestModel>? {
+        mutableLiveData = MainActivityRepository.updateCoinNotifications(hashMap, view, token)
+        return mutableLiveData
+    }
+    fun saveContactSupportMessage(hashMap: HashMap<String, String>, view: View?,token:String): LiveData<EmailConfirmationRequestModel>? {
+        mutableLiveData = MainActivityRepository.saveContactSupportMessage(hashMap, view, token)
+        return mutableLiveData
+    }
 }
 
 

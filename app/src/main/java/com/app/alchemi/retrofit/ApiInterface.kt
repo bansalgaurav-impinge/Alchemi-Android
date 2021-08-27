@@ -9,13 +9,13 @@ import retrofit2.http.*
 
 interface ApiInterface {
 
- @POST("getOrCreateLinkToken")
- fun getLinkToken(): Single<LinkToken>
+    @POST(Constants.WS_GET_CREATE_TOKEN)
+    fun getLinkToken(@Header(Constants.KEY_AUTHORIZATION) token: String): Call<LinkToken>
     @GET(Constants.LOGIN)
     fun getCategories(): Call<ServicesSetterGetter>
 
     @GET(Constants.LOGIN)
-   suspend fun signUP(): Call<SignUpModel>
+    suspend fun signUP(): Call<SignUpModel>
 
     @FormUrlEncoded
     @POST(Constants.LOGIN)
@@ -36,7 +36,7 @@ interface ApiInterface {
     fun addUserSSN(@Body hashMap: HashMap<String, String>): Call<EmailConfirmationRequestModel>
 
     @PUT(Constants.WS_ADD_USER_PIN)
-    fun addUserPin(@Body hashMap: HashMap<String, String>): Call<EmailConfirmationRequestModel>
+    fun addUserPin(@Body hashMap: HashMap<String, String>): Call<AddPinModel>
 
     @GET(Constants.WS_GET_COUNTRY_LIST)
     fun getCountryList(): Call<CountryListModel>
@@ -70,7 +70,7 @@ interface ApiInterface {
    fun logout(@Header(Constants.KEY_AUTHORIZATION) token: String): Call<EmailConfirmationRequestModel>
 
     @PUT(Constants.WS_UPDATE_USER_PIN)
-    fun updateUserPin(@Body hashMap: HashMap<String, String>,@Header(Constants.KEY_AUTHORIZATION) token: String): Call<EmailConfirmationRequestModel>
+    fun updateUserPin(@Body hashMap: HashMap<String, String>,@Header(Constants.KEY_AUTHORIZATION) token: String): Call<AddPinModel>
 
     @GET(Constants.WS_HOME)
     fun homeData(@Header(Constants.KEY_AUTHORIZATION) token: String): Call<HomeModel>
@@ -122,6 +122,18 @@ interface ApiInterface {
     fun adduserFavouriteCoin(@Body hashMap: HashMap<String, String>,@Header(Constants.KEY_AUTHORIZATION) token: String): Call<EmailConfirmationRequestModel>
     @POST(Constants.WS_REMOVE_USER_FAVORITE)
     fun removeUserFavouriteCoin(@Body hashMap: HashMap<String, String>,@Header(Constants.KEY_AUTHORIZATION) token: String): Call<EmailConfirmationRequestModel>
-
-
+    @POST(Constants.WS_GET_EXCHANGE_ACCESS_TOKEN)
+    fun getOrExchangeAccessToken(@Body hashMap: HashMap<String, String>,@Header(Constants.KEY_AUTHORIZATION) token: String): Call<EmailConfirmationRequestModel>
+    @GET(Constants.WS_GET_CARD_LIST)
+    fun getCardList(@Header(Constants.KEY_AUTHORIZATION) token: String): Call<CardModel>
+    @POST(Constants.WS_ACTIVATE_DEACTIVATE_CARD)
+    fun activateOrDeactivateCard(@Body hashMap: HashMap<String, String>,@Header(Constants.KEY_AUTHORIZATION) token: String): Call<EmailConfirmationRequestModel>
+    @POST(Constants.WS_ACTIVATE_DEACTIVATE_STAKE_STATUS)
+    fun activateOrDeactivateStake(@Body hashMap: HashMap<String, String>,@Header(Constants.KEY_AUTHORIZATION) token: String): Call<EmailConfirmationRequestModel>
+    @PUT(Constants.WS_UPDATE_COIN_NOTIFICATIONS)
+    fun updateCoinNotifications(@Body hashMap: HashMap<String, String>,@Header(Constants.KEY_AUTHORIZATION) token: String): Call<EmailConfirmationRequestModel>
+    @POST(Constants.WS_SAVE_CONTACT_SUPPORT_MESSAGE)
+    fun saveContactSupportMessage(@Body hashMap: HashMap<String, String>,@Header(Constants.KEY_AUTHORIZATION) token: String): Call<EmailConfirmationRequestModel>
+    @GET(Constants.WS_GET_CONTACT_SUPPORT_MESSAGE_LIST)
+    fun getContactSupportMessage(@Header(Constants.KEY_AUTHORIZATION) token: String): Call<GetContactSupportModel>
 }

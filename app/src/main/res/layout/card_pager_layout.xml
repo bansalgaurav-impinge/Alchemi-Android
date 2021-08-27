@@ -27,6 +27,7 @@
             android:paddingStart="@dimen/_20dp"
             android:paddingEnd="@dimen/_20dp">
             <ImageView
+                android:id="@+id/ivCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -98,7 +99,7 @@
                         android:text="@string/with_without_aco"
                         />
                     <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/switchPassCodeOptions"
+                        android:id="@+id/switchTakingOptions"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end|center_vertical"
@@ -130,6 +131,7 @@
                 android:gravity="center_vertical"
                 android:weightSum="1">
                 <TextView
+                    android:id="@+id/tvDetail"
                     style="@style/TextView_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -158,12 +160,14 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:orientation="horizontal"
+                        android:weightSum="2"
                         android:gravity="center_horizontal">
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center">
                         <TextView
                             android:id="@+id/tvCashBack"
@@ -171,7 +175,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginTop="0dp"
-                            android:text="2% Back"
+                            android:text=""
                             android:textColor="@color/black"
                             android:textStyle="bold"/>
                         <TextView
@@ -179,7 +183,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginTop="0dp"
-                            android:text="on card spend"
+                            android:text="@string/on_card_spend"
                             android:textSize="14sp"
                             android:textColor="@color/black" />
                     </LinearLayout>
@@ -190,6 +194,13 @@
                             android:background="@color/colorGrey"
                             android:layout_marginStart="@dimen/_10dp"
                             android:layout_marginEnd="@dimen/_10dp" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:gravity="center">
                         <TextView
                             android:id="@+id/tvCashBack2"
                             style="@style/TextView_style"
@@ -201,6 +212,25 @@
                             android:text="100% \nBack¹,₂"
                             android:textStyle="bold"
                             android:textColor="@color/black" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+                                <ImageView
+                                    android:id="@+id/ivSpotify"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_spotify"
+                                    android:layout_weight="0.5"/>
+                                <ImageView
+                                    android:id="@+id/ivNetflix"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_net"
+                                    android:layout_weight="0.5"/>
+                            </LinearLayout>
+                    </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
                 <View
@@ -228,7 +258,7 @@
                         android:layout_marginTop="0dp"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="10% \nACO Stake Rewards¹"
+                        android:text=""
                         android:textStyle="bold"
                         android:textColor="@color/black" />
                 </LinearLayout>
@@ -277,6 +307,7 @@
                     android:paddingBottom="@dimen/_10dp"
                     android:text="@string/card_cash_back" />
                 <TextView
+                    android:id="@+id/tvCahsBackCard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -288,13 +319,14 @@
                     android:paddingBottom="@dimen/_10dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:text="2%" />
+                    android:text="" />
             </RelativeLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/colorGrey" />
             <TextView
+                android:id="@+id/tvAirportLongue"
                 style="@style/TextView_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -303,11 +335,73 @@
                 android:paddingBottom="@dimen/_10dp"
                 android:paddingEnd="@dimen/_20dp"
                 android:paddingStart="@dimen/_20dp"
-                app:drawableEndCompat="@drawable/ic_tick"
                 android:textColor="@color/black"
                 android:drawablePadding="3dp"
+                app:drawableEndCompat="@drawable/ic_tick"
                 android:textSize="14sp"
-                android:text="Airport Lounge" />
+                android:text="@string/airport_longue" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/colorGrey" />
+                <TextView
+                    android:id="@+id/tvSpotifyReimbursement"
+                    style="@style/TextView_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:paddingTop="@dimen/_10dp"
+                    android:paddingEnd="@dimen/_20dp"
+                    android:paddingStart="@dimen/_20dp"
+                    app:drawableEndCompat="@drawable/ic_tick"
+                    android:textColor="@color/black"
+                    android:drawablePadding="3dp"
+                    android:textSize="14sp"
+                    android:text="@string/spotify_reimbursement" />
+                <TextView
+                    android:id="@+id/tvSpotifyReimbursementDetail"
+                    style="@style/TextView_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:paddingBottom="@dimen/_10dp"
+                    android:paddingEnd="@dimen/_20dp"
+                    android:paddingStart="@dimen/_20dp"
+                    android:textColor="@color/colorDarkGrey"
+                    android:drawablePadding="3dp"
+                    android:textSize="11sp"
+                    android:text="" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/colorGrey" />
+                <TextView
+                    android:id="@+id/tvNetFlixReimbursement"
+                    style="@style/TextView_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:paddingTop="@dimen/_10dp"
+                    android:paddingEnd="@dimen/_20dp"
+                    android:paddingStart="@dimen/_20dp"
+                    app:drawableEndCompat="@drawable/ic_tick"
+                    android:textColor="@color/black"
+                    android:drawablePadding="3dp"
+                    android:textSize="14sp"
+                    android:text="@string/netflix_reimbursement" />
+                <TextView
+                    android:id="@+id/tvNetFlixReimbursementDetail"
+                    style="@style/TextView_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:paddingBottom="@dimen/_10dp"
+                    android:paddingEnd="@dimen/_20dp"
+                    android:paddingStart="@dimen/_20dp"
+                    android:textColor="@color/colorDarkGrey"
+                    android:drawablePadding="3dp"
+                    android:textSize="11sp"
+                    android:text="" />
         </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
@@ -340,8 +434,9 @@
                     android:paddingTop="@dimen/_10dp"
                     android:paddingBottom="@dimen/_10dp"
                     android:textSize="14sp"
-                    android:text="ACO Stake Rewards" />
+                    android:text="@string/aco_stake_rewards" />
                 <TextView
+                    android:id="@+id/tvACO"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -353,9 +448,10 @@
                     android:paddingBottom="10dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:text="10%" />
+                    android:text="" />
             </RelativeLayout>
                 <TextView
+                    android:id="@+id/tvACODetails"
                     style="@style/TextView_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -365,7 +461,7 @@
                     android:textSize="11sp"
                     android:paddingEnd="@dimen/_20dp"
                     android:paddingStart="@dimen/_20dp"
-                    android:text="Better rates and higher limits in Alchemi Earn" />
+                    android:text="" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
@@ -441,6 +537,7 @@
                     android:layout_centerVertical="true"
                     android:text="@string/monthly_fee" />
                 <TextView
+                    android:id="@+id/tvMonthlyFee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorGreen"
@@ -479,6 +576,7 @@
                     android:layout_centerVertical="true"
                     android:text="@string/annual_fee" />
                 <TextView
+                    android:id="@+id/tvAnnualFee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorGreen"
@@ -517,6 +615,7 @@
                     android:layout_centerVertical="true"
                     android:text="@string/delivery_fee" />
                 <TextView
+                    android:id="@+id/tvDeliveryFee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorGreen"
@@ -539,7 +638,7 @@
                 style="@style/TextView_style"
                 android:textStyle="bold"
                 android:textSize="14sp"
-                android:text="ACO Token Purchase Required" />
+                android:text="@string/aco_token_purchase_required" />
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -552,11 +651,11 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:textSize="14sp"
+                            android:textSize="13sp"
                             android:layout_marginTop="0dp"
                             android:textColor="@color/black"
                             android:padding="15dp"
-                            android:text="Purchase &amp; Hold 50,000 ACO token for 180 days to receive the Royal Indigo Card. Learn More" />
+                            android:text="" />
                     </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
@@ -578,6 +677,7 @@
                 android:orientation="horizontal"
                 android:background="@drawable/card_bg">
                 <TextView
+                    android:id="@+id/tvLimitsDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -588,7 +688,7 @@
                     android:textSize="14sp"
                     android:layout_weight="0.25"
                     android:layout_marginEnd="5dp"
-                    android:text="Zero-free Monthly ATM withdrawal Limit (2% thereafter)" />
+                    android:text="" />
                 <TextView
                     android:id="@+id/tvAmount"
                     android:layout_width="match_parent"
@@ -602,7 +702,7 @@
                     android:gravity="end|center_vertical"
                     android:layout_weight="0.75"
                     android:paddingBottom="@dimen/_10dp"
-                    android:text="US $800" />
+                    android:text="" />
             </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
@@ -639,6 +739,7 @@
                         android:paddingBottom="@dimen/_10dp"
                         android:text="@string/material" />
                     <TextView
+                        android:id="@+id/tvCardMaterial"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
@@ -650,13 +751,14 @@
                         android:paddingBottom="@dimen/_10dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:text="Metal" />
+                        android:text="" />
                 </RelativeLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:background="@color/colorGrey" />
                 <TextView
+                    android:id="@+id/tvContactLessPayment"
                     style="@style/TextView_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -669,12 +771,13 @@
                     android:paddingEnd="@dimen/_20dp"
                     android:paddingStart="@dimen/_20dp"
                     android:drawablePadding="3dp"
-                    android:text="Contactless Payment" />
+                    android:text="@string/contact_less_payment" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:background="@color/colorGrey" />
                 <TextView
+                    android:id="@+id/tvCardAcceptedAnywhere"
                     style="@style/TextView_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -687,7 +790,7 @@
                     app:drawableEndCompat="@drawable/ic_tick"
                     android:textColor="@color/black"
                     android:drawablePadding="3dp"
-                    android:text="Pay anywhere Visa is accepted" />
+                    android:text="@string/pay_anywhere" />
             </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
@@ -697,7 +800,7 @@
                 android:textStyle="bold"
                 android:textSize="14sp"
                 android:layout_marginTop="@dimen/_10dp"
-                android:text="Consumer Finanacial Protection Bureau Short Form" />
+                android:text="@string/consumer_financial_bureau" />
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
@@ -711,7 +814,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Select From Disclosure"
+                    android:text="@string/selective_disclosure"
                     style="@style/TextView_style"
                     android:textColor="@color/black"
                     android:layout_marginTop="0dp"
@@ -739,7 +842,7 @@
                 android:textStyle="bold"
                 android:textSize="14sp"
                 android:layout_marginTop="@dimen/_10dp"
-                android:text="Alchemi.com Visa Card Terms &amp; Conditions" />
+                android:text="@string/alchemi_visa_terms_and_conditions" />
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
@@ -774,10 +877,11 @@
                     android:contentDescription="@string/app_name"/>
             </RelativeLayout>
             <TextView
+                android:id="@+id/tvTermsAndConditionsDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10dp"
-                android:text="By using this card you agree to the terms &amp; conditions of the cardholder agreement &amp; fee schedule. If anyThe Alchemi.com Visa Card is issued by metropolitan commercial bank (Member FDIC pursuant to all license from Visa U.S.A inc. \u0022 metropolitan commercial bank\u0022	 &amp; \u0022 metropolitan\u0022	 are registered trademark of Metropolitan Commercial Bank 2014"
+                android:text=""
                 style="@style/TextView_style"
                 android:textSize="11sp"
                 android:textColor="@color/black"

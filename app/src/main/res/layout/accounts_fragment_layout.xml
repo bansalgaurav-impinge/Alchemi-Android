@@ -29,8 +29,6 @@
             android:id="@+id/ivShowHideText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
             android:src="@drawable/ic_show"
             app:tint="@color/colorGrey"
             android:layout_toEndOf="@+id/tvBalance"

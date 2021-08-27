@@ -3,13 +3,13 @@ package com.app.alchemi.views.fragments.dashboardFeatures
 import Constants
 import android.graphics.Color
 import android.os.Bundle
-import android.text.format.DateFormat
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
@@ -18,7 +18,9 @@ import com.app.alchemi.R
 import com.app.alchemi.models.CoinData
 import com.app.alchemi.utils.AlchemiApplication
 import com.app.alchemi.utils.MyValueFormatter
+import com.app.alchemi.utils.Target
 import com.app.alchemi.utils.ViewUtils
+import com.app.alchemi.utils.navigateTo
 import com.app.alchemi.viewModel.CheckUserPinViewModel
 import com.app.alchemi.viewModel.CoinHistoryViewModel
 import com.app.alchemi.views.activities.HomeActivity
@@ -35,10 +37,11 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 
 import kotlinx.android.synthetic.main.coin_detail_fragment_layout.*
+import kotlinx.android.synthetic.main.coin_detail_fragment_layout.llLayout
+import kotlinx.android.synthetic.main.tab_layout.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 import java.text.NumberFormat
 
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
 import kotlin.collections.set
@@ -57,8 +60,7 @@ class CoinDetailFragment: Fragment(), OnChartValueSelectedListener {
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View =
+            savedInstanceState: Bundle?): View =
         inflater.inflate(R.layout.coin_detail_fragment_layout, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -67,7 +69,14 @@ class CoinDetailFragment: Fragment(), OnChartValueSelectedListener {
         checkUserPinViewModel =  ViewModelProvider(this).get(CheckUserPinViewModel::class.java)
 
         tvAbout.text=getString(R.string.about)+" "+requireArguments()[Constants.KEY_TITLE].toString()
-        tvBuy.text=getString(R.string.buy)+" "+requireArguments()[Constants.KEY_DESCRIPTION].toString()
+        tvBuy.text=getString(R.string.buy_,requireArguments()[Constants.KEY_DESCRIPTION].toString())
+
+        tvBuy.setOnClickListener {
+            Toast.makeText(requireContext(),"Insufficient Balance.", Toast.LENGTH_LONG).show()
+              val bundle= Bundle()
+           // bundle.
+            navigateTo(requireContext(), Target.PLAID)
+        }
         val totalData= NumberFormat.getInstance().format(ViewUtils.roundOffValue(2, (requireArguments()[Constants.KEY_PRICE].toString()).toDouble()))
         ViewUtils.changeTextColor(tvPriceUSD, (getString(R.string.dollar_sign) + " " + totalData+ " " + getString(R.string.usd)), ContextCompat.getColor(requireContext(), R.color.white), 1, (getString(R.string.dollar_sign) + " " + totalData + " " + getString(R.string.usd)).length - 4, false)
 
@@ -85,6 +94,19 @@ class CoinDetailFragment: Fragment(), OnChartValueSelectedListener {
         }else{
             rlBTCPrice.visibility=View.VISIBLE
         }
+        /***
+         *  Click to back icon
+         */
+//
+//         try {
+//            if (activity!=null) {
+//                (activity as HomeActivity).ivBack.setOnClickListener {
+//                    (activity as HomeActivity).clearStack(1)
+//                }
+//            }
+//        }catch (e: Exception){
+//            e.printStackTrace()
+//        }
 
         /**
          *  Manage Click listener
@@ -117,11 +139,19 @@ class CoinDetailFragment: Fragment(), OnChartValueSelectedListener {
         if (arguments!=null){
             requireActivity().toolbar_title.text = requireArguments()[Constants.KEY_TITLE].toString()
         }
-        requireActivity().ivBack.setImageResource(R.drawable.ic_back)
-        requireActivity().ivBack.visibility=View.VISIBLE
-        requireActivity().ivChat.visibility=View.GONE
-        requireActivity().ivSettings.visibility=View.GONE
-        requireActivity().rlAcx.visibility=View.GONE
+        if(requireActivity().tab_layout.selectedTabPosition==3){
+            requireActivity().toolbar.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.colorLightBlack))
+            requireActivity().appbar.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.colorLightBlack))
+            requireActivity().ivBack.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorGrey), android.graphics.PorterDuff.Mode.MULTIPLY)
+            requireActivity().toolbar_title.setTextColor(ContextCompat.getColor(requireContext(),R.color.colorGrey))
+            requireActivity().ivNotification.visibility=View.GONE
+            requireActivity().ivCrop.visibility=View.GONE
+        }else {
+            requireActivity().ivBack.visibility = View.VISIBLE
+            requireActivity().ivChat.visibility = View.GONE
+            requireActivity().ivSettings.visibility = View.GONE
+            requireActivity().rlAcx.visibility = View.GONE
+        }
         requireActivity().ivStar.visibility=View.VISIBLE
         requireActivity().ivStar.setOnClickListener {
             addRemoveFavouriteCoinAPI(request)
@@ -129,13 +159,25 @@ class CoinDetailFragment: Fragment(), OnChartValueSelectedListener {
     }
 
     override fun onDestroyView() {
-        (activity as HomeActivity).ivChat.visibility = View.VISIBLE
-        (activity as HomeActivity).rlAcx.visibility = View.VISIBLE
-        (activity as HomeActivity).toolbar_title.text = getString(R.string.home)
-        (activity as HomeActivity).ivBack.setImageResource(R.drawable.setting)
-        (activity as HomeActivity).ivSettings.visibility = View.VISIBLE
-        (activity as HomeActivity).ivBack.visibility = View.GONE
-        requireActivity().ivStar.visibility=View.GONE
+        val currentFragment = activity?.supportFragmentManager?.fragments?.last()
+        if(requireActivity().tab_layout.selectedTabPosition==3){
+            requireActivity().toolbar.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.colorYellow))
+            requireActivity().clToolbar.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.colorYellow))
+            requireActivity().toolbar.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.colorYellow))
+            requireActivity().ivBack.setColorFilter(ContextCompat.getColor(requireContext(), R.color.black), android.graphics.PorterDuff.Mode.MULTIPLY)
+            requireActivity().toolbar_title.setTextColor(ContextCompat.getColor(requireContext(),R.color.black))
+            requireActivity().ivNotification.visibility=View.VISIBLE
+            requireActivity().ivCrop.visibility=View.VISIBLE
+            (activity as HomeActivity).toolbar_title.text = getString(R.string.track_coin)
+        }else {
+            Log.e("test>>", ">>>>" + requireActivity().tab_layout.selectedTabPosition)
+            (activity as HomeActivity).ivChat.visibility = View.VISIBLE
+            (activity as HomeActivity).rlAcx.visibility = View.VISIBLE
+            (activity as HomeActivity).toolbar_title.text = getString(R.string.home)
+            (activity as HomeActivity).ivSettings.visibility = View.VISIBLE
+            (activity as HomeActivity).ivBack.visibility = View.GONE
+        }
+        requireActivity().ivStar.visibility = View.GONE
         super.onDestroyView()
     }
 
@@ -143,8 +185,7 @@ class CoinDetailFragment: Fragment(), OnChartValueSelectedListener {
     fun checkValidationAndGetCoinHistory(){
         if (!ViewUtils.verifyAvailableNetwork(requireContext())) {
             ViewUtils.showSnackBar(
-                    view,
-                    getString(R.string.you_re_not_connected_to_the_internet_n_please_connect_and_retry)
+                    view, getString(R.string.you_re_not_connected_to_the_internet_n_please_connect_and_retry)
             )
         }
         else {
@@ -322,15 +363,15 @@ class CoinDetailFragment: Fragment(), OnChartValueSelectedListener {
             for (i in xValsOriginalMillis) {
 
                 if (Constants.KEY_HISTORY_TYPE=="hour"||Constants.KEY_HISTORY_TYPE=="day") {
-                    xValsDateLabel.add("" + getDateFromUTCTimestamp(i, OUTPUT_TIME_FORMAT))
+                    xValsDateLabel.add("" + ViewUtils.getDateFromUTCTimestamp(i, OUTPUT_TIME_FORMAT))
                 }else{
-                    xValsDateLabel.add("" + getDateFromUTCTimestamp(i, OUTPUT_DATE_FORMAT))
+                    xValsDateLabel.add("" +  ViewUtils.getDateFromUTCTimestamp(i, OUTPUT_DATE_FORMAT))
                 }
             }
-
+            chart.setNoDataText("")
             chart.xAxis.valueFormatter = (MyValueFormatter(xValsDateLabel))
             chart.data = data
-         val l1 = chart.legend
+            val l1 = chart.legend
             l1.isEnabled = false
             chart.invalidate()
 
@@ -422,28 +463,28 @@ class CoinDetailFragment: Fragment(), OnChartValueSelectedListener {
         Log.e("Nothing selected", "Nothing selected.")
     }
 
-    /***
-     *  Get Date fron utc Time stamp
-     */
-    fun getDateFromUTCTimestamp(mTimestamp: Long, mDateFormate: String?): String? {
-        var date: String? = null
-        try {
-            val cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
-            cal.timeInMillis = mTimestamp * 1000L
-            date = DateFormat.format(mDateFormate, cal.timeInMillis).toString()
-            val formatter = SimpleDateFormat(mDateFormate, Locale.ENGLISH)
-            val value = formatter.parse(date)
-            val dateFormatter = SimpleDateFormat(mDateFormate, Locale.ENGLISH)
-            dateFormatter.timeZone = TimeZone.getDefault()
-            date = dateFormatter.format(value)
-
-            return date
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        return date
-    }
+//    /***
+//     *  Get Date from utc Time stamp
+//     */
+//    fun getDateFromUTCTimestamp(mTimestamp: Long, mDateFormate: String?): String? {
+//        var date: String? = null
+//        try {
+//            val cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+//            cal.timeInMillis = mTimestamp * 1000L
+//            date = DateFormat.format(mDateFormate, cal.timeInMillis).toString()
+//            val formatter = SimpleDateFormat(mDateFormate, Locale.ENGLISH)
+//            val value = formatter.parse(date)
+//            val dateFormatter = SimpleDateFormat(mDateFormate, Locale.ENGLISH)
+//            dateFormatter.timeZone = TimeZone.getDefault()
+//            date = dateFormatter.format(value)
+//
+//            return date
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//        }
+//
+//        return date
+//    }
 
     /***
      *  method to hit add/ remove favourite coin

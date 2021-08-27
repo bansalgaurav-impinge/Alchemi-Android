@@ -409,24 +409,24 @@ object MainActivityRepository {
     /**
      * add pin code
      */
-    fun addUserPinCall(hashMap: HashMap<String, String>, token: String, view: View?): MutableLiveData<EmailConfirmationRequestModel> {
-        val signupMutableLiveData = MutableLiveData<EmailConfirmationRequestModel>()
-        var call: Call<EmailConfirmationRequestModel>? = null
+    fun addUserPinCall(hashMap: HashMap<String, String>, token: String, view: View?): MutableLiveData<AddPinModel> {
+        val signupMutableLiveData = MutableLiveData<AddPinModel>()
+        var call: Call<AddPinModel>? = null
         if (token.isEmpty()|| token.isNullOrEmpty()) {
             call = RetrofitClient.apiInterface.addUserPin(hashMap)
         }else{
             call = RetrofitClient.apiInterface.updateUserPin(hashMap,token)
         }
-        call.enqueue(object: Callback<EmailConfirmationRequestModel> {
-            override fun onFailure(call: Call<EmailConfirmationRequestModel>, t: Throwable) {
+        call.enqueue(object: Callback<AddPinModel> {
+            override fun onFailure(call: Call<AddPinModel>, t: Throwable) {
                 Log.e("DEBUG : ", t.message.toString())
                 ViewUtils.dismissProgress()
                 ViewUtils.showSnackBar(view,""+t.message.toString())
             }
 
             override fun onResponse(
-                call: Call<EmailConfirmationRequestModel>,
-                response: Response<EmailConfirmationRequestModel>
+                call: Call<AddPinModel>,
+                response: Response<AddPinModel>
             ) {
                 ViewUtils.dismissProgress()
                 Log.e("DEBUG : ", response.body().toString())
@@ -1341,7 +1341,7 @@ object MainActivityRepository {
      * Get Staking Option
      */
 
-    fun getStakingOption(hashMap: HashMap<String, String>, view: View?, token: String): MutableLiveData<StakingOptionsModel> {
+    fun getStakingOption(view: View?, token: String): MutableLiveData<StakingOptionsModel> {
         val mutableLiveData = MutableLiveData<StakingOptionsModel>()
         RetrofitClient.apiInterface.getStakingOptions(token).enqueue(object: Callback<StakingOptionsModel> {
             override fun onFailure(call: Call<StakingOptionsModel>, t: Throwable) {
@@ -1480,11 +1480,363 @@ object MainActivityRepository {
     }
 
     /**
-     *  c;aer stack
+     *  Method to exchange Token
+     */
+
+    fun getOrExchangeAccessToken(hashMap: HashMap<String, String>, view: View?, token: String): MutableLiveData<EmailConfirmationRequestModel> {
+        val mutableLiveData = MutableLiveData<EmailConfirmationRequestModel>()
+        RetrofitClient.apiInterface.getOrExchangeAccessToken(hashMap,token).enqueue(object: Callback<EmailConfirmationRequestModel> {
+            override fun onFailure(call: Call<EmailConfirmationRequestModel>, t: Throwable) {
+                ViewUtils.dismissProgress()
+                Log.e("DEBUG : ", t.message.toString())
+                ViewUtils.showSnackBar(view,""+t.message.toString())
+            }
+
+            override fun onResponse(call: Call<EmailConfirmationRequestModel>, response: Response<EmailConfirmationRequestModel>) {
+                ViewUtils.dismissProgress()
+                Log.e("DEBUG : ", response.body().toString())
+                try {
+                    if (response.body()!=null) {
+                        val data = response.body()
+                        //val msg = data!!.message
+                        mutableLiveData.value = data!!
+                    }else if(response.errorBody()!=null){
+                        if (response.code()==400){
+                            ViewUtils.showSnackBar(view,    view?.context?.getString(R.string.server_error))
+                        }
+                        else if (response.code()==403){
+                            showAlertDialog(view?.context!!,view)
+                        }
+                        else{
+                            ViewUtils.showSnackBar(view,response.message())
+                        }
+                    }
+                    else{
+                        ViewUtils.showSnackBar(view,response.message())
+                    }
+                }catch (e: Exception){
+                    e.printStackTrace()
+                    ViewUtils.showSnackBar(view,view?.context?.getString(R.string.server_error))
+                }
+            }
+        })
+
+        return mutableLiveData
+    }
+
+
+
+    /***
+     *  GET OR CREATE LINK TOKEN
+     */
+    fun getCreateLinkToken(view: View?, token: String): MutableLiveData<LinkToken> {
+        val mutableLiveData = MutableLiveData<LinkToken>()
+        RetrofitClient.apiInterface.getLinkToken(token).enqueue(object: Callback<LinkToken> {
+            override fun onFailure(call: Call<LinkToken>, t: Throwable) {
+                ViewUtils.dismissProgress()
+                Log.e("DEBUG : ", t.message.toString())
+                ViewUtils.showSnackBar(view,""+t.message.toString())
+            }
+
+            override fun onResponse(call: Call<LinkToken>, response: Response<LinkToken>) {
+                ViewUtils.dismissProgress()
+                Log.e("DEBUG : ", response.body().toString())
+                try {
+                    if (response.body()!=null) {
+                        val data = response.body()
+                        //val msg = data!!.message
+                        mutableLiveData.value = data!!
+                    }else if(response.errorBody()!=null){
+                        if (response.code()==400){
+                            ViewUtils.showSnackBar(view,view?.context?.getString(R.string.server_error))
+                        }
+                        else if (response.code()==403){
+                            showAlertDialog(view?.context!!,view)
+                        }
+                        else{
+                            ViewUtils.showSnackBar(view,response.message())
+                        }
+                    }
+                    else{
+                        ViewUtils.showSnackBar(view,response.message())
+                    }
+                }catch (e: Exception){
+                    e.printStackTrace()
+                    ViewUtils.showSnackBar(view,view?.context?.getString(R.string.server_error))
+                }
+            }
+        })
+
+        return mutableLiveData
+    }
+
+    /****
+     *  Get Card List
+     */
+
+    fun getCardList(view: View?, token: String): MutableLiveData<CardModel> {
+        val mutableLiveData = MutableLiveData<CardModel>()
+        RetrofitClient.apiInterface.getCardList(token).enqueue(object: Callback<CardModel> {
+            override fun onFailure(call: Call<CardModel>, t: Throwable) {
+                ViewUtils.dismissProgress()
+                Log.e("DEBUG : ", t.message.toString())
+                ViewUtils.showSnackBar(view,""+t.message.toString())
+            }
+
+            override fun onResponse(call: Call<CardModel>, response: Response<CardModel>) {
+                ViewUtils.dismissProgress()
+                Log.e("DEBUG : ", response.body().toString())
+                try {
+                    if (response.body()!=null) {
+                        val data = response.body()
+                        //val msg = data!!.message
+                        mutableLiveData.value = data!!
+                    }else if(response.errorBody()!=null){
+                        if (response.code()==403){
+                            showAlertDialog(view?.context!!,view)
+                        }
+                        else{
+                            ViewUtils.showSnackBar(view,response.message())
+                        }
+                    }
+                    else{
+                        ViewUtils.showSnackBar(view,response.message())
+                    }
+                }catch (e: Exception){
+                    e.printStackTrace()
+                    ViewUtils.showSnackBar(view,view?.context?.getString(R.string.server_error))
+                }
+            }
+        })
+
+        return mutableLiveData
+    }
+
+    /***
+     *  Activate or deactivate card
+     */
+
+    fun activateOrDeactivate(hashMap: HashMap<String, String>, view: View?, token: String): MutableLiveData<EmailConfirmationRequestModel> {
+        val mutableLiveData = MutableLiveData<EmailConfirmationRequestModel>()
+        RetrofitClient.apiInterface.activateOrDeactivateCard(hashMap,token).enqueue(object: Callback<EmailConfirmationRequestModel> {
+            override fun onFailure(call: Call<EmailConfirmationRequestModel>, t: Throwable) {
+                ViewUtils.dismissProgress()
+                Log.e("DEBUG : ", t.message.toString())
+                ViewUtils.showSnackBar(view,""+t.message.toString())
+            }
+
+            override fun onResponse(call: Call<EmailConfirmationRequestModel>, response: Response<EmailConfirmationRequestModel>) {
+                ViewUtils.dismissProgress()
+                Log.e("DEBUG : ", response.body().toString())
+                try {
+                    if (response.body()!=null) {
+                        val data = response.body()
+                        //val msg = data!!.message
+                        mutableLiveData.value = data!!
+                    }else if(response.errorBody()!=null){
+                        if (response.code()==400){
+                            ViewUtils.showSnackBar(view,    view?.context?.getString(R.string.server_error))
+                        }
+                        else if (response.code()==403){
+                            showAlertDialog(view?.context!!,view)
+                        }
+                        else{
+                            ViewUtils.showSnackBar(view,response.message())
+                        }
+                    }
+                    else{
+                        ViewUtils.showSnackBar(view,response.message())
+                    }
+                }catch (e: Exception){
+                    e.printStackTrace()
+                    ViewUtils.showSnackBar(view,view?.context?.getString(R.string.server_error))
+                }
+            }
+        })
+
+        return mutableLiveData
+    }
+    /***
+     *  Activate deactivate stake status
+     */
+    fun activateOrDeactivateStakeStatus(hashMap: HashMap<String, String>, view: View?, token: String): MutableLiveData<EmailConfirmationRequestModel> {
+        val mutableLiveData = MutableLiveData<EmailConfirmationRequestModel>()
+        RetrofitClient.apiInterface.activateOrDeactivateStake(hashMap,token).enqueue(object: Callback<EmailConfirmationRequestModel> {
+            override fun onFailure(call: Call<EmailConfirmationRequestModel>, t: Throwable) {
+                ViewUtils.dismissProgress()
+                Log.e("DEBUG : ", t.message.toString())
+                ViewUtils.showSnackBar(view,""+t.message.toString())
+            }
+
+            override fun onResponse(call: Call<EmailConfirmationRequestModel>, response: Response<EmailConfirmationRequestModel>) {
+                ViewUtils.dismissProgress()
+                Log.e("DEBUG : ", response.body().toString())
+                try {
+                    if (response.body()!=null) {
+                        val data = response.body()
+                        //val msg = data!!.message
+                        mutableLiveData.value = data!!
+                    }else if(response.errorBody()!=null){
+                        if (response.code()==400){
+                            ViewUtils.showSnackBar(view,    view?.context?.getString(R.string.server_error))
+                        }
+                        else if (response.code()==403){
+                            showAlertDialog(view?.context!!,view)
+                        }
+                        else{
+                            ViewUtils.showSnackBar(view,response.message())
+                        }
+                    }
+                    else{
+                        ViewUtils.showSnackBar(view,response.message())
+                    }
+                }catch (e: Exception){
+                    e.printStackTrace()
+                    ViewUtils.showSnackBar(view,view?.context?.getString(R.string.server_error))
+                }
+            }
+        })
+
+        return mutableLiveData
+    }
+
+    /****
+     * Update Coin Notifications
+     */
+    fun updateCoinNotifications(hashMap: HashMap<String, String>, view: View?, token: String): MutableLiveData<EmailConfirmationRequestModel> {
+        val mutableLiveData = MutableLiveData<EmailConfirmationRequestModel>()
+        RetrofitClient.apiInterface.updateCoinNotifications(hashMap,token).enqueue(object: Callback<EmailConfirmationRequestModel> {
+            override fun onFailure(call: Call<EmailConfirmationRequestModel>, t: Throwable) {
+                ViewUtils.dismissProgress()
+                Log.e("DEBUG : ", t.message.toString())
+                ViewUtils.showSnackBar(view,""+t.message.toString())
+            }
+
+            override fun onResponse(call: Call<EmailConfirmationRequestModel>, response: Response<EmailConfirmationRequestModel>) {
+                ViewUtils.dismissProgress()
+                Log.e("DEBUG : ", response.body().toString())
+                try {
+                    if (response.body()!=null) {
+                        val data = response.body()
+                        //val msg = data!!.message
+                        mutableLiveData.value = data!!
+                    }else if(response.errorBody()!=null){
+                        if (response.code()==400){
+                            ViewUtils.showSnackBar(view,    view?.context?.getString(R.string.server_error))
+                        }
+                        else if (response.code()==403){
+                            showAlertDialog(view?.context!!,view)
+                        }
+                        else{
+                            ViewUtils.showSnackBar(view,response.message())
+                        }
+                    }
+                    else{
+                        ViewUtils.showSnackBar(view,response.message())
+                    }
+                }catch (e: Exception){
+                    e.printStackTrace()
+                    ViewUtils.showSnackBar(view,view?.context?.getString(R.string.server_error))
+                }
+            }
+        })
+
+        return mutableLiveData
+    }
+
+    /****
+     *  Save Contact support Message
+     */
+    fun saveContactSupportMessage(hashMap: HashMap<String, String>, view: View?, token: String): MutableLiveData<EmailConfirmationRequestModel> {
+        val mutableLiveData = MutableLiveData<EmailConfirmationRequestModel>()
+        RetrofitClient.apiInterface.saveContactSupportMessage(hashMap,token).enqueue(object: Callback<EmailConfirmationRequestModel> {
+            override fun onFailure(call: Call<EmailConfirmationRequestModel>, t: Throwable) {
+                ViewUtils.dismissProgress()
+                Log.e("DEBUG : ", t.message.toString())
+                ViewUtils.showSnackBar(view,""+t.message.toString())
+            }
+
+            override fun onResponse(call: Call<EmailConfirmationRequestModel>, response: Response<EmailConfirmationRequestModel>) {
+                ViewUtils.dismissProgress()
+                Log.e("DEBUG : ", response.body().toString())
+                try {
+                    if (response.body()!=null) {
+                        val data = response.body()
+                        //val msg = data!!.message
+                        mutableLiveData.value = data!!
+                    }else if(response.errorBody()!=null){
+                        if (response.code()==400){
+                            ViewUtils.showSnackBar(view,    view?.context?.getString(R.string.server_error))
+                        }
+                        else if (response.code()==403){
+                            showAlertDialog(view?.context!!,view)
+                        }
+                        else{
+                            ViewUtils.showSnackBar(view,response.message())
+                        }
+                    }
+                    else{
+                        ViewUtils.showSnackBar(view,response.message())
+                    }
+                }catch (e: Exception){
+                    e.printStackTrace()
+                    ViewUtils.showSnackBar(view,view?.context?.getString(R.string.server_error))
+                }
+            }
+        })
+
+        return mutableLiveData
+    }
+
+    /***
+     *  GET CONTACT SUPPORT MESSAGE LIST
+     */
+    fun getContactSupportMessageList(view: View?, token: String): MutableLiveData<GetContactSupportModel> {
+        val mutableLiveData = MutableLiveData<GetContactSupportModel>()
+        RetrofitClient.apiInterface.getContactSupportMessage(token).enqueue(object: Callback<GetContactSupportModel> {
+            override fun onFailure(call: Call<GetContactSupportModel>, t: Throwable) {
+                ViewUtils.dismissProgress()
+                Log.e("DEBUG : ", t.message.toString())
+                ViewUtils.showSnackBar(view,""+t.message.toString())
+            }
+
+            override fun onResponse(call: Call<GetContactSupportModel>, response: Response<GetContactSupportModel>) {
+                ViewUtils.dismissProgress()
+                Log.e("DEBUG : ", response.body().toString())
+                try {
+                    if (response.body()!=null) {
+                        val data = response.body()
+                        //val msg = data!!.message
+                        mutableLiveData.value = data!!
+                    }else if(response.errorBody()!=null){
+                        if (response.code()==400){
+                            ViewUtils.showSnackBar(view,    view?.context?.getString(R.string.server_error))
+                        }
+                        else if (response.code()==403){
+                            showAlertDialog(view?.context!!,view)
+                        }
+                        else{
+                            ViewUtils.showSnackBar(view,response.message())
+                        }
+                    }
+                    else{
+                        ViewUtils.showSnackBar(view,response.message())
+                    }
+                }catch (e: Exception){
+                    e.printStackTrace()
+                    ViewUtils.showSnackBar(view,view?.context?.getString(R.string.server_error))
+                }
+            }
+        })
+
+        return mutableLiveData
+    }
+
+    /**
+     *  clear stack
      */
     fun clearDataLandToLoginScreen(view: View){
         try {
-
             alchemiApplication?.clearAllData()
             val activity = view.context as Activity
             activity.startActivity(Intent(view.context, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
@@ -1510,7 +1862,6 @@ object MainActivityRepository {
                    clearDataLandToLoginScreen(view)
 
                 }
-
         ViewUtils.alert = dialogBuilder.create()
         ViewUtils.alert!!.show()
     }

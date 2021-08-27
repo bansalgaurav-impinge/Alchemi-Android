@@ -20,6 +20,7 @@ object Constants {
     val CODE_200=200
     var defaultSelectedIndex=0
     const val KEY_AUTHORIZATION="Authorization"
+    const val DEVICE_NAME="android"
 //eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Ijk2N2VhYzY4LWI0NTgtNDRlNC05NDBjLWQxMDlhY2Y2ODdmOCIsImVtYWlsIjoiaGFyZGVlcGthdXJ1cHBhbEBnbWFpbC5jb20iLCJqd3Rfc2VjcmV0IjoiMmZmYWM2OWQtNjAzYy00YjkzLTkyNzMtMjY0NGY5MmJhMjJkIn0.jMguUd5dHWWv_ha-25d_ft-c--8wsVeknsR4hPZ83H8
 
     const val KEY_PRICE="price"
@@ -30,6 +31,8 @@ object Constants {
     const val ALGORITHM = "HmacSHA512"
     const val EMPTY="EMPTY"
     const val KEY_TITLE="title"
+    const val KEY_BODY="body"
+    const val KEY_TYPE="type"
     const val KEY_DESCRIPTION="description"
     const val KEY_REDIRECT_URL="redirect_url"
     const val KEY_EMAIL="email"
@@ -59,6 +62,14 @@ object Constants {
     const val KEY_CODE="code"
     const val KEY_NAME="name"
     const val KEY_REFERRAL_CODE="referral_code"
+    const val KEY_PUBLIC_TOKEN="public_token"
+    const val KEY_CARD_ID="card_id"
+    const val KEY_IS_USER_ACTIVATE="is_user_active"
+    const val KEY_STAKING_STATUS ="staking_status"
+    const val KEY_MESSAGE="message"
+    const val KEY_DEVICE_TOKEN="device_token"
+    const val KEY_DEVICE_TYPE="device_type"
+    const val KEY_DEVICE_ID="device_id"
 
 
 
@@ -70,6 +81,8 @@ object Constants {
     var selectedTab=0
     var KEY_HISTORY_TYPE="hour"
     var KEY_SELECTED_SPINNER_VALUE="Flexible"
+    var KEY_REFRESH_DATA ="refresh_data"
+    var KEY_REFRESH_HOME_SCREEN_DATA ="refresh_home_screen_data"
 
 
 
@@ -109,6 +122,14 @@ object Constants {
     const val WS_GET_TRACK_LIST="getTrackCoinList"
     const val WS_ADD_USER_FAVOURITE_COIN="addUserFavouriteCoin"
     const val WS_REMOVE_USER_FAVORITE="removeUserFavouriteCoin"
+    const val WS_GET_CREATE_TOKEN="getOrCreateLinkToken"
+    const val WS_GET_EXCHANGE_ACCESS_TOKEN="getOrExchangeAccessToken"
+    const val WS_GET_CARD_LIST="getCardList"
+    const val WS_ACTIVATE_DEACTIVATE_CARD="activateOrDeactivateCrad"
+    const val WS_ACTIVATE_DEACTIVATE_STAKE_STATUS="activateOrDeactivateStakeStatus"
+    const val WS_UPDATE_COIN_NOTIFICATIONS= "updateUserCoinNotificationStatus"
+    const val WS_SAVE_CONTACT_SUPPORT_MESSAGE="saveContactSupportMessage"
+    const val WS_GET_CONTACT_SUPPORT_MESSAGE_LIST="getContactSupportMessageList"
 
 
     /*

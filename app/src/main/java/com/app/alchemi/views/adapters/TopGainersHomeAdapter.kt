@@ -9,20 +9,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.app.alchemi.R
 import com.app.alchemi.models.TopGainer
 import com.app.alchemi.utils.ViewUtils
 import com.app.alchemi.views.activities.HomeActivity
 import com.app.alchemi.views.fragments.dashboardFeatures.CoinDetailFragment
+import com.app.alchemi.views.fragments.dashboardFeatures.HomeFragment
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.top_gainers_card.view.*
 import java.math.RoundingMode
 
 
 internal class TopGainersHomeAdapter(
-        topGainersList: List<TopGainer>) : RecyclerView.Adapter<TopGainersHomeAdapter.ViewHolder>() {
+    topGainersList: List<TopGainer>,
+    val homeFragment: HomeFragment
+) : RecyclerView.Adapter<TopGainersHomeAdapter.ViewHolder>() {
     val topGainersList: List<TopGainer> = topGainersList
     private var mContext: Context? = null
 
@@ -36,6 +38,7 @@ internal class TopGainersHomeAdapter(
         holder.setIsRecyclable(false)
         holder.itemView.tvCoin.text=topGainersList[position].FULLNAME
         holder.itemView.tvCoinName.text=topGainersList[position].FROMSYMBOL
+        holder.itemView.ivNotifications.isChecked=topGainersList[position].coin_notification
         val d=topGainersList[position].CHANGEPCT24HOUR.toDouble()
         val rounded = d.toBigDecimal().setScale(2, RoundingMode.UP).toDouble()
         ViewUtils.loadImage(Constants.IMAGE_URL + "" + topGainersList[position].IMAGEURL, holder.itemView.ivIcon, mContext!!)
@@ -46,6 +49,9 @@ internal class TopGainersHomeAdapter(
         }else{
             holder.itemView.tvCoinAmountVariation.setTextColor(ContextCompat.getColor(mContext!!, R.color.colorRed))
             holder.itemView.tvCoinAmountVariation.text=""+ViewUtils.roundOffValue(2, topGainersList[position].CHANGEPCT24HOUR)+"%"
+        }
+        holder.itemView.ivNotifications.setOnCheckedChangeListener { _, isChecked ->
+            homeFragment.updateCoinNotifications(isChecked,topGainersList[position].FROMSYMBOL, holder.itemView.ivNotifications)
         }
 
         holder.itemView.animation =

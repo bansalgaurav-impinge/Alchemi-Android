@@ -85,9 +85,9 @@ class AccountAllocationFragment: Fragment(){
         rvList?.setHasFixedSize(true)
         rvList?.adapter = accountAllocationAdapter
         (activity as HomeActivity).tab_layout?.visibility=View.VISIBLE
-        requireActivity().ivBack.setOnClickListener {
-            (activity as HomeActivity).clearStack(1)
-        }
+//        requireActivity().ivBack.setOnClickListener {
+//            (activity as HomeActivity).clearStack(1)
+//        }
        // checkValidationAndGetCoinHistory()
     }
 
@@ -108,7 +108,7 @@ class AccountAllocationFragment: Fragment(){
         requireActivity().ivBack.visibility=View.GONE
         requireActivity().ivScan.visibility=View.VISIBLE
         requireActivity().ivChart.visibility=View.VISIBLE
-        requireActivity().toolbar_title.text = getString(R.string.account)
+        requireActivity().toolbar_title.text = getString(R.string.accounts)
         super.onDestroyView()
     }
 
@@ -168,7 +168,7 @@ class AccountAllocationFragment: Fragment(){
         chart.setTransparentCircleAlpha(110)
 
         chart.holeRadius= 60f
-        chart.transparentCircleRadius = 50f
+        chart.transparentCircleRadius = 55f
 
         chart.setDrawCenterText(false)
 

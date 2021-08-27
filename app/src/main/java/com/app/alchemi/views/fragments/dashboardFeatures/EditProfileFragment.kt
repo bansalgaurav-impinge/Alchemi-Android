@@ -102,9 +102,9 @@ class EditProfileFragment: Fragment() {
             bundle.putSerializable(Constants.KEY_EMAIL,tvEmail.text.toString())
             (activity as HomeActivity).replaceFragment(UpdateEmailFragment(),""+UpdateEmailFragment,bundle)
         }
-        (activity as HomeActivity).ivBack.setOnClickListener {
-            (activity as HomeActivity).onBackPressed()
-        }
+//        (activity as HomeActivity).ivBack.setOnClickListener {
+//            (activity as HomeActivity).onBackPressed()
+//        }
         /**
          * Bottom Sheet Behaviour
          */
@@ -145,7 +145,6 @@ class EditProfileFragment: Fragment() {
         (activity as HomeActivity).tab_layout?.visibility=View.GONE
         Constants.isEditProfile=false
         requireActivity().toolbar_title.text  = getString(R.string.edit_profile)
-        requireActivity().ivBack.setImageResource(R.drawable.ic_back)
         requireActivity().ivChat.visibility=View.GONE
         requireActivity().rlAcx.visibility=View.GONE
 

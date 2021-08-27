@@ -1,24 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:id="@+id/rlParent">
+    <RelativeLayout
+        android:id="@+id/chatLayoutSender"
+        android:background="@drawable/chat_sender_bubble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="30dp"
+        android:layout_gravity="end"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingStart="7dp"
+        android:visibility="gone"
+        android:paddingEnd="7dp">
+        <TextView
+            android:id="@+id/tvMessageSender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingStart="7dp"
+            android:paddingEnd="15dp"
+            android:textAlignment="textEnd"
+            style="@style/TextView_style"
+            android:textColor="@color/colorLightBlack"
+            android:text="" />
+    </RelativeLayout>
 <RelativeLayout
     android:id="@+id/chatLayout"
     android:background="@drawable/chat_receiver_bubble"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="7dp"
-    android:padding="5dp">
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginEnd="30dp"
+    android:layout_marginStart="10dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:paddingStart="7dp"
+    android:visibility="gone"
+    android:paddingEnd="7dp">
     <TextView
         android:id="@+id/tvMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
-        android:padding="5dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="7dp"
         style="@style/TextView_style"
+        android:textAlignment="textStart"
         android:textColor="@color/colorLightBlack"
         android:text="" />
 </RelativeLayout>
-    </RelativeLayout>
+
+</LinearLayout>

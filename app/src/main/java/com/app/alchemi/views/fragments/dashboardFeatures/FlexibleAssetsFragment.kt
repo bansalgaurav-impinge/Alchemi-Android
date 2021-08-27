@@ -92,9 +92,9 @@ class FlexibleAssetsFragment: Fragment(){
 
 
         (activity as HomeActivity).tab_layout?.visibility=View.VISIBLE
-        requireActivity().ivBack.setOnClickListener {
-            (activity as HomeActivity).clearStack(1)
-        }
+//        requireActivity().ivBack.setOnClickListener {
+//            (activity as HomeActivity).clearStack(1)
+//        }
 
     }
 
@@ -103,7 +103,6 @@ class FlexibleAssetsFragment: Fragment(){
         if (arguments!=null){
             requireActivity().toolbar_title.text = getString(R.string.alchemi_earn)
         }
-        requireActivity().ivBack.setImageResource(R.drawable.ic_back)
         requireActivity().ivBack.visibility=View.VISIBLE
         requireActivity().ivScan.visibility=View.GONE
         requireActivity().ivChart.visibility=View.GONE
@@ -111,7 +110,6 @@ class FlexibleAssetsFragment: Fragment(){
     }
 
     override fun onDestroyView() {
-        requireActivity().ivBack.setImageResource(R.drawable.ic_back)
         requireActivity().ivBack.visibility=View.GONE
         requireActivity().ivScan.visibility=View.VISIBLE
         requireActivity().ivChart.visibility=View.VISIBLE

@@ -63,16 +63,15 @@ class TermAssetsFragment: Fragment(){
         rvList?.adapter = termAssetsAdapter
 
         (activity as HomeActivity).tab_layout?.visibility=View.VISIBLE
-        requireActivity().ivBack.setOnClickListener {
-            (activity as HomeActivity).clearStack(1)
-        }
+//        requireActivity().ivBack.setOnClickListener {
+//            (activity as HomeActivity).clearStack(1)
+//        }
 
     }
 
     override fun onResume() {
         super.onResume()
         requireActivity().toolbar_title.text = getString(R.string.three_months_terms)
-        requireActivity().ivBack.setImageResource(R.drawable.ic_back)
         requireActivity().ivBack.visibility=View.VISIBLE
         requireActivity().ivScan.visibility=View.GONE
         requireActivity().ivChart.visibility=View.GONE
@@ -80,7 +79,6 @@ class TermAssetsFragment: Fragment(){
     }
 
     override fun onDestroyView() {
-        requireActivity().ivBack.setImageResource(R.drawable.ic_back)
         requireActivity().toolbar_title.text = getString(R.string.alchemi_earn)
         requireActivity().ivBack.visibility=View.GONE
         requireActivity().ivScan.visibility=View.VISIBLE

@@ -31,15 +31,17 @@
             android:scaleType="fitXY"/>
         <TextView
             android:id="@+id/tvTitleTxt"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="0dp"
             android:padding="15dp"
-            style="@style/TextView_style_large"
+            style="@style/ButtonText_style_Bg"
+            android:background="@color/transparent"
             android:layout_centerVertical="true"
             android:text="@string/deposit"
-            android:fontFamily="@font/roboto_medium"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/roboto_bold"
             android:textAlignment="center"
             android:includeFontPadding="true"
             android:textColor="@color/black"
@@ -76,22 +78,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                style="@style/TextView_style_large"
+                style="@style/ButtonText_style_Bg"
+                android:background="@color/transparent"
                 android:text=""
+                android:includeFontPadding="true"
                 android:layout_marginTop="0dp"
                 android:textAlignment="center"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:fontFamily="@font/roboto_medium"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:layout_weight="1"
                 android:layout_marginEnd="1dp"
                 android:textColor="@color/black" />
             <View
                 android:layout_width="0.5dp"
-                android:layout_height="match_parent"
+                android:layout_height="60dp"
                 android:background="@color/colorDarkGrey"
                 android:layout_gravity="center"
+                android:includeFontPadding="true"
                 android:foregroundGravity="center"/>
             <TextView
                 android:id="@+id/tvBlockChainDomains"
@@ -104,7 +109,8 @@
                 android:text="@string/blockchain_domains"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="16sp"
+                android:includeFontPadding="true"
                 android:fontFamily="@font/roboto_medium"
                 android:foregroundGravity="center_vertical"
                 android:layout_weight="1"
@@ -167,6 +173,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="15dp"
+            android:layout_marginTop="5dp"
             android:paddingBottom="15dp"
             android:background="@color/colorBottomSheetSearchView">
             <TextView
@@ -178,6 +185,7 @@
                 android:layout_toStartOf="@+id/ivCopy"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_20dp"
+                android:textStyle="bold"
                 android:text="Tieuuerer453342523dfhgffdjfndffgdklfjdshdshdshjd"
                 android:textColor="@color/black" />
             <ImageView

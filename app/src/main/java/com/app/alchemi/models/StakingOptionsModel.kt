@@ -12,5 +12,8 @@ data class StakingOptions(
 data class Option(
         val code: String,
         val id: Int,
-        val name: String
+        val name: String,
+        val description: String,
+        val interest: String
+
 )
