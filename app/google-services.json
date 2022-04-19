@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "911700948973",
+    "project_id": "alchemi-5b191",
+    "storage_bucket": "alchemi-5b191.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:911700948973:android:7f22b865505daa700b99e4",
+        "android_client_info": {
+          "package_name": "com.app.alchemi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "911700948973-3rc5k06891ljufeqr4oa2buivli5vhbf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.alchemi",
+            "certificate_hash": "79a438ac58f1f58ae244c7bec9d986c0d56d44c0"
+          }
+        },
+        {
+          "client_id": "911700948973-qc3a133btf439mjvodk2lqnkvfa8rg3t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOWTpWi5XEKC2VScUy_5J3mIY__fM1l9E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "911700948973-qc3a133btf439mjvodk2lqnkvfa8rg3t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

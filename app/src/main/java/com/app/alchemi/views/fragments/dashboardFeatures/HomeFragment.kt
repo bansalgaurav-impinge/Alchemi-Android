@@ -4,9 +4,10 @@ import Constants
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,23 +21,23 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.app.alchemi.R
 import com.app.alchemi.interfaceintercation.OnItemClickListener
 import com.app.alchemi.models.CoinData
 import com.app.alchemi.models.TopGainer
+import com.app.alchemi.roomdatabase.AppDatabase
+import com.app.alchemi.roomdatabase.CardDetail
 import com.app.alchemi.utils.AlchemiApplication
+import com.app.alchemi.utils.Target
 import com.app.alchemi.utils.ViewUtils
+import com.app.alchemi.utils.navigateTo
 import com.app.alchemi.viewModel.CheckUserPinViewModel
 import com.app.alchemi.viewModel.CoinHistoryViewModel
 import com.app.alchemi.viewModel.GetTopCryptoCurrencyViewModel
 import com.app.alchemi.viewModel.HomeViewModel
 import com.app.alchemi.views.activities.HomeActivity
-import com.app.alchemi.views.adapters.AddedCardsAdapter
-import com.app.alchemi.views.adapters.BuyCoinAdapter
-import com.app.alchemi.views.adapters.DepositCurrencyAdapter
-import com.app.alchemi.views.adapters.NewsAdapter
-import com.app.alchemi.views.adapters.TopGainersHomeAdapter
-import com.app.alchemi.views.adapters.TradeCoinsAdapter
+import com.app.alchemi.views.adapters.*
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.github.mikephil.charting.charts.LineChart
@@ -46,37 +47,36 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.add_money_bottom_sheet.*
 import kotlinx.android.synthetic.main.bottom_sheet_layout.bottomSheet
 import kotlinx.android.synthetic.main.bottom_sheet_layout.ivCrossIcon
 import kotlinx.android.synthetic.main.buy_crypto_bootom_sheet.*
+import kotlinx.android.synthetic.main.card_fee_bottom_sheet.*
 import kotlinx.android.synthetic.main.deposit_coin_wallet_address_layout.*
 import kotlinx.android.synthetic.main.deposit_coin_wallet_address_layout.ivBackIcon
 import kotlinx.android.synthetic.main.deposit_coin_wallet_address_layout.tvBuy
 import kotlinx.android.synthetic.main.deposit_coin_wallet_address_layout.tvCoinName
 import kotlinx.android.synthetic.main.deposit_coin_wallet_address_layout.tvTitleTxt
 import kotlinx.android.synthetic.main.deposit_coin_wallet_address_layout.tvWalletAddress
-import kotlinx.android.synthetic.main.deposit_coin_wallet_address_layout.view1
-import kotlinx.android.synthetic.main.deposit_coin_wallet_address_layout.view2
 import kotlinx.android.synthetic.main.deposit_currency_bottom_sheet.*
+import kotlinx.android.synthetic.main.edit_card_bottom_sheet.*
 import kotlinx.android.synthetic.main.home_fragment_layout.*
-import kotlinx.android.synthetic.main.home_fragment_layout.rvTopNews
-import kotlinx.android.synthetic.main.home_fragment_layout.swipeRefresh
 import kotlinx.android.synthetic.main.recycler_view.*
 import kotlinx.android.synthetic.main.trade_bottom_sheet.*
 import kotlinx.android.synthetic.main.transafer_bottom_sheet.*
-import kotlinx.android.synthetic.main.transafer_bottom_sheet.llDeposit
 import kotlinx.android.synthetic.main.withdraw_currency_bottom_sheet.*
-import kotlinx.android.synthetic.main.card_fee_bottom_sheet.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.text.NumberFormat
-import java.util.ArrayList
+import java.util.*
+import kotlin.collections.HashMap
+import kotlin.collections.set
 
 
 class HomeFragment: Fragment(), OnItemClickListener {
@@ -91,16 +91,23 @@ class HomeFragment: Fragment(), OnItemClickListener {
     private lateinit var coinHistoryViewModel: CoinHistoryViewModel
     private lateinit var checkUserPinViewModel: CheckUserPinViewModel
     private lateinit var addedCardsAdapter: AddedCardsAdapter
+    private lateinit var removeCardsAdapter: RemoveCardsAdapter
+    var selectedSymbol=""
     var coinList: List<TopGainer>?=null
     var dialog: BottomSheetDialog?=null
+    var rvCardsList:RecyclerView?=null
+    var rvCards:RecyclerView?=null
     var isFromDeposit=false
     var isFromWithDraw=false
+    var cards: List<CardDetail>?=null
     companion object {
         fun newInstance() = HomeFragment()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View =
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View =
         inflater.inflate(R.layout.home_fragment_layout, container, false)
 
 
@@ -122,7 +129,7 @@ class HomeFragment: Fragment(), OnItemClickListener {
         val llmTradeCoins = LinearLayoutManager(context)
         llmTradeCoins.orientation = LinearLayoutManager.VERTICAL
         rvListHome?.layoutManager = llmTradeCoins
-
+        getCardList()
 
         homeData(false)
         /***
@@ -273,7 +280,15 @@ class HomeFragment: Fragment(), OnItemClickListener {
 
                     }
                     BottomSheetBehavior.STATE_EXPANDED -> {
+//                            bottomSheet.requestLayout()
+//
+//                        bottomSheet.invalidate()
 
+                            /*or
+                             recyclerView.scrollToPosition(0);
+                             recyclerView.requestLayout();*/
+
+                     //   }
                     }
                     BottomSheetBehavior.STATE_DRAGGING -> {
 
@@ -624,6 +639,7 @@ class HomeFragment: Fragment(), OnItemClickListener {
         }
         else{
             val bundle = Bundle()
+            selectedSymbol=""+coinList!![itemId!!.toInt()].FROMSYMBOL
             slideUpDownBottomSheetToChooseCard(coinList!![itemId!!.toInt()].FROMSYMBOL)
             //(activity as HomeActivity).replaceFragment(StakingPeriodFragment(), "" + StakingPeriodFragment, bundle)
         }
@@ -865,7 +881,9 @@ class HomeFragment: Fragment(), OnItemClickListener {
         YoYo.with(Techniques.SlideInUp).duration(500).playOn(dialogView)
         val ivClose = dialog?.ivCrossIcon as ImageView
         val tvAlchemiWallet =dialog?.tvAlchemiWallet as TextView
+        val tvCoinName=dialog?.tvCoinName as TextView
         val tvCreditCard =dialog?.tvCreditCard as TextView
+        val tvEdit =dialog?.tvEdit as TextView
         val viewCard= dialog?.viewCard as View
         val viewWallet= dialog?.viewWallet as View
         val tvUSDPrice = dialog?.tvUSDPrice as TextView
@@ -874,18 +892,22 @@ class HomeFragment: Fragment(), OnItemClickListener {
         val rlAddCard = dialog?.rlAddCard as RelativeLayout
         val progress= dialog?.progress as ProgressBar
         val  etAmount=dialog?.etAmount as EditText
-        val rvCardList=dialog?.rvCards as RecyclerView
+        rvCards=dialog?.rvCards as RecyclerView
+        tvCoinName.setText(fromsymbol)
         tvBuy.text = getString(R.string.buy_,etAmount.text.toString()+" "+fromsymbol)
         tvTitleTxt.text=getString(R.string.buy_,fromsymbol)
-        var cardList= ArrayList<String>()
-        cardList.add("472545XXXXXX8523")
+        getCardList()
         val llm = LinearLayoutManager(context)
         llm.orientation = LinearLayoutManager.VERTICAL
-        rvCardList.layoutManager = llm
-        addedCardsAdapter = AddedCardsAdapter(cardList)
-        rvCardList.adapter = addedCardsAdapter
+        rvCards?.layoutManager = llm
+        addedCardsAdapter = AddedCardsAdapter(cards,this)
+        rvCards?.adapter = addedCardsAdapter
         addedCardsAdapter.notifyDataSetChanged()
-        rvCardList.adapter?.notifyDataSetChanged()
+        rvCards?.adapter?.notifyDataSetChanged()
+        rlAddCard.setOnClickListener {
+            val  bundle= Bundle()
+            navigateTo(requireContext(), Target.ADD_PAYMENT_METHOD)
+        }
         etAmount.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
 
@@ -919,6 +941,14 @@ class HomeFragment: Fragment(), OnItemClickListener {
         }
 
 
+        tvEdit.setOnClickListener {
+            if(cards!!.isNotEmpty()) {
+                dialog?.dismiss()
+                slideUpDownBottomSheetEditCard()
+            }
+        }
+
+
 
         ivClose.setOnClickListener {
             YoYo.with(Techniques.SlideOutDown).duration(500).playOn(dialogView)
@@ -945,6 +975,7 @@ class HomeFragment: Fragment(), OnItemClickListener {
         dialog?.setContentView(dialogView)
         YoYo.with(Techniques.SlideInUp).duration(500).playOn(dialogView)
         val ivClose = dialog?.ivCrossIcon as ImageView
+        val ivBackIcon=dialog?.ivBackIcon as ImageView
         val tvContinue = dialog?.tvContinue as TextView
         val llCheckbox = dialog?.llCheckbox as LinearLayout
         val checkboxTermsConditions=dialog?.checkboxTermsConditions as CheckBox
@@ -954,6 +985,10 @@ class HomeFragment: Fragment(), OnItemClickListener {
         }
         llCheckbox.setOnClickListener {
             checkboxTermsConditions.performClick()
+        }
+        ivBackIcon.setOnClickListener {
+            dialog?.dismiss()
+            slideUpDownBottomSheetToChooseCard(selectedSymbol)
         }
         checkboxTermsConditions.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -1038,8 +1073,130 @@ class HomeFragment: Fragment(), OnItemClickListener {
     internal fun onMessageEvent(event:String) {
         if (event == Constants.KEY_REFRESH_HOME_SCREEN_DATA){
             homeData(true)
+        }else  if (event == Constants.KEY_REFRESH_LOCAL_DATA){
+            getCardList()
+            Handler(Looper.getMainLooper()).postDelayed({
+                val llm = LinearLayoutManager(context)
+                llm.orientation = LinearLayoutManager.VERTICAL
+                dialog?.rvCards?.layoutManager = llm
+                addedCardsAdapter = AddedCardsAdapter(cards,this)
+                dialog?.rvCards?.adapter = addedCardsAdapter
+                addedCardsAdapter.notifyDataSetChanged()
+                dialog?.rvCards?.adapter?.notifyDataSetChanged()
+                addedCardsAdapter.notifyDataSetChanged()
+                removeCardsAdapter = RemoveCardsAdapter(cards,this)
+                dialog?.rvCardsList?.adapter = removeCardsAdapter
+                addedCardsAdapter.notifyDataSetChanged()
+                dialog?.rvCardsList?.adapter?.notifyDataSetChanged()
+            },300
+            )
         }
+
+    }
+    fun databaseInit(): AppDatabase {
+        return Room.databaseBuilder(
+            requireContext(),
+            AppDatabase::class.java, "cardDetails"
+        ).build()
+
+//        val cardDao = db.cardDao()
+//        val cards: List<CardDetail> = cardDao.getAll()
+    }
+    fun getCardList(){
+        GlobalScope.launch(Dispatchers.IO) {
+            val db=  databaseInit()
+            val cardDao = db.cardDao()
+//        val cards: List<CardDetail> = cardDao.getAll()
+             cards = cardDao.getAll()
+
+           // Log.e("test>>>","cards>>"+cards)
+        }
+
+    }
+    fun deleteCard(position: Int){
+        GlobalScope.launch(Dispatchers.IO) {
+            val db=  databaseInit()
+            val cardDao = db.cardDao()
+                 cardDao.delete(cards!![position])
+            cards = cardDao.getAll() }
+           Handler(Looper.getMainLooper()).postDelayed({
+               if(cards?.isNotEmpty() == true) {
+                   removeCardsAdapter = RemoveCardsAdapter(cards, this)
+
+                   dialog?.rvCardsList?.adapter = removeCardsAdapter
+                   addedCardsAdapter.notifyDataSetChanged()
+               }else{
+                   dialog?.dismiss()
+                   slideUpDownBottomSheetToChooseCard(selectedSymbol)
+               }
+        },300
+        )
+
+
     }
 
+    fun maskCardNumber(cardNumber: String, mask: String): String? {
+
+        // format the number
+        var index = 0
+        val maskedNumber = StringBuilder()
+        for (element in mask) {
+            val c = element
+            when (c) {
+                '#' -> {
+                    maskedNumber.append(cardNumber[index])
+                    index++
+                }
+                'X' -> {
+                    maskedNumber.append(c)
+                    index++
+                }
+                else -> {
+                    maskedNumber.append(c)
+                    index++
+                }
+            }
+        }
+
+        // return the masked number
+        return maskedNumber.toString()
+    }
+//https://stackoverflow.com/questions/45964215/how-to-make-textview-will-only-show-the-last-4-digits-numbers/45964479
+
+    private fun slideUpDownBottomSheetEditCard() {
+        val dialogView = layoutInflater.inflate(R.layout.edit_card_bottom_sheet, null)
+        dialog = BottomSheetDialog(requireContext(),R.style.SheetDialog)
+        dialog?.setContentView(dialogView)
+        YoYo.with(Techniques.SlideInUp).duration(500).playOn(dialogView)
+        val ivClose = dialog?.ivCrossIcon as ImageView
+         rvCardsList=dialog?.rvCardsList as RecyclerView
+        getCardList()
+        val llm = LinearLayoutManager(context)
+        llm.orientation = LinearLayoutManager.VERTICAL
+        rvCardsList?.layoutManager = llm
+        removeCardsAdapter = RemoveCardsAdapter(cards,this)
+
+        rvCardsList?.adapter = removeCardsAdapter
+        addedCardsAdapter.notifyDataSetChanged()
+        rvCardsList?.adapter?.notifyDataSetChanged()
+        ivClose.setOnClickListener {
+            YoYo.with(Techniques.SlideOutDown).duration(500).playOn(dialogView)
+            EventBus.getDefault().post(Constants.KEY_REFRESH_LOCAL_DATA)
+            dialog?.dismiss()
+            getCardList()
+            val llm = LinearLayoutManager(context)
+            llm.orientation = LinearLayoutManager.VERTICAL
+            dialog?.rvCards?.layoutManager = llm
+            addedCardsAdapter = AddedCardsAdapter(cards,this)
+            dialog?.rvCards?.adapter = addedCardsAdapter
+            addedCardsAdapter.notifyDataSetChanged()
+            dialog?.rvCards?.adapter?.notifyDataSetChanged()
+            slideUpDownBottomSheetToChooseCard(selectedSymbol)
+
+        }
+
+        dialog?.show()
+
+    }
 
 }

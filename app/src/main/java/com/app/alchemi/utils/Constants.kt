@@ -18,6 +18,7 @@ object Constants {
 
     val Token: String="token "
     val CODE_200=200
+    var SEKECTED_ACTIVITY=0
     var defaultSelectedIndex=0
     const val KEY_AUTHORIZATION="Authorization"
     const val DEVICE_NAME="android"
@@ -83,6 +84,7 @@ object Constants {
     var KEY_SELECTED_SPINNER_VALUE="Flexible"
     var KEY_REFRESH_DATA ="refresh_data"
     var KEY_REFRESH_HOME_SCREEN_DATA ="refresh_home_screen_data"
+    var KEY_REFRESH_LOCAL_DATA ="refresh_local_data"
 
 
 

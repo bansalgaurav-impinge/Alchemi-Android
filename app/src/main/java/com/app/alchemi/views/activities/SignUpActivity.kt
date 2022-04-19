@@ -1,8 +1,6 @@
 package com.app.alchemi.views.activities
 
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.app.alchemi.R

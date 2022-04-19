@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: com.veriff:veriff-library:3.15.0@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f0daaa926ae2ad0b13dcc0ed96a461c2/jetified-veriff-library-3.15.0/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2d1014d324993923cbbb7b592322ea0a/jetified-veriff-library-3.15.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f0daaa926ae2ad0b13dcc0ed96a461c2/jetified-veriff-library-3.15.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f0daaa926ae2ad0b13dcc0ed96a461c2/jetified-veriff-library-3.15.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f0daaa926ae2ad0b13dcc0ed96a461c2/jetified-veriff-library-3.15.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2d1014d324993923cbbb7b592322ea0a/jetified-veriff-library-3.15.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2d1014d324993923cbbb7b592322ea0a/jetified-veriff-library-3.15.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2d1014d324993923cbbb7b592322ea0a/jetified-veriff-library-3.15.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

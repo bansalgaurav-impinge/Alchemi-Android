@@ -115,7 +115,7 @@
             android:name=".views.activities.AddCardDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustResize" />
 
         <meta-data
             android:name="preloaded_fonts"
@@ -138,7 +138,8 @@
 
         <activity
             android:name=".views.activities.PlaidActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:noHistory="true" />
 <!--        <activity-->
 <!--            android:name=".views.activities.MainActivityResultContractActivity"-->
 <!--            android:screenOrientation="portrait" />-->

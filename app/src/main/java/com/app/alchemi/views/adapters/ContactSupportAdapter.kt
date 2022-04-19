@@ -32,65 +32,15 @@ internal class ContactSupportAdapter(
         if (chatList[position].message.isNotEmpty()){
             holder.itemView.chatLayoutSender.visibility=View.VISIBLE
             holder.itemView.tvMessageSender.text=chatList[position].message
-//            holder.itemView.chatLayout.background=ContextCompat.getDrawable(mContext!!,
-//                R.drawable.chat_sender_bubble)
-//            holder.itemView.chatLayout.setHorizontalGravity(Gravity.END)
-//            val params =  holder.itemView.chatLayout.getLayoutParams() as RelativeLayout.LayoutParams
-//            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT)
-//
-//
-//            holder.itemView.chatLayout.setLayoutParams(params)
-            //holder.itemView.chatLayout.gravity=
+
         }
         if (chatList[position].reply.isNotEmpty()){
             holder.itemView.chatLayout.visibility=View.VISIBLE
             holder.itemView.tvMessage.text=chatList[position].reply
-//            holder.itemView.chatLayout.background=ContextCompat.getDrawable(mContext!!,
-//                R.drawable.chat_sender_bubble)
-//            holder.itemView.chatLayout.setHorizontalGravity(Gravity.END)
-//            val params =  holder.itemView.chatLayout.getLayoutParams() as RelativeLayout.LayoutParams
-//            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT)
-//
-//
-//            holder.itemView.chatLayout.setLayoutParams(params)
-            //holder.itemView.chatLayout.gravity=
+
         }
 
-//        //holder.itemView.tvMessage.gravity= Gravity.CENTER
-//        if (position==0){
-//            // val params= chatLayout.get
-//            val params = LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.WRAP_CONTENT,
-//                LinearLayout.LayoutParams.WRAP_CONTENT
-//            ).apply {
-//                weight = 1.0f
-//                gravity = Gravity.END
-//
-//            }
-//            holder.itemView.chatLayout.background= ContextCompat.getDrawable(
-//                mContext!!,
-//                R.drawable.chat_receiver_bubble
-//            )
-//
-//        }else{
-//            val params = RelativeLayout.LayoutParams(
-//                RelativeLayout.LayoutParams.WRAP_CONTENT,
-//                RelativeLayout.LayoutParams.WRAP_CONTENT
-//            ).apply {
-//
-//            }
-//            holder.itemView.chatLayout.layoutParams = params
-//           // holder.itemView.chatLayout.chatLayout.gravity=Gravity.END
-//
-//            val layoutParams = holder.itemView.rlParent.layoutParams
-//            layoutParams.apply {RelativeLayout.ALIGN_PARENT_START  }
-//            holder.itemView.chatLayout.layoutParams = params
-//            holder.itemView.chatLayout.background=ContextCompat.getDrawable(
-//                mContext!!,
-//                R.drawable.chat_sender_bubble
-//            )
-//            holder.itemView.animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.item_animation)
-//        }
+
         holder.itemView.setOnClickListener {
             notifyDataSetChanged()
 

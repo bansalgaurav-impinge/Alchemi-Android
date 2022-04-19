@@ -38,6 +38,7 @@ enum class Target {
 
     }
 
+
     /**
  * Navigates to the given [target] by starting the corresponding activity for result [requestCode]
  */

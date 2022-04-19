@@ -64,11 +64,11 @@
             android:layout_marginBottom="@dimen/_10dp">
             <CheckBox
                 android:id="@+id/checkboxTermsConditions"
-                style="@style/TextView_style"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:text=""
                 android:padding="0dp"
+                android:theme="@style/MyCheckBox"
                 android:drawablePadding="1dp"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
@@ -81,7 +81,8 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 style="@style/TextView_style"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="0dp"
+
                 android:focusableInTouchMode="false"
                 android:textColorHighlight="@color/black"
                 android:textSize="11sp"

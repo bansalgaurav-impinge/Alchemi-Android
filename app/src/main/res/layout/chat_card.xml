@@ -31,6 +31,7 @@
             android:paddingEnd="15dp"
             android:textAlignment="textEnd"
             style="@style/TextView_style"
+            android:textSize="14sp"
             android:textColor="@color/colorLightBlack"
             android:text="" />
     </RelativeLayout>
@@ -55,9 +56,10 @@
         android:layout_margin="2dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:paddingStart="15dp"
-        android:paddingEnd="7dp"
+        android:paddingStart="7dp"
+        android:paddingEnd="15dp"
         style="@style/TextView_style"
+        android:textSize="14sp"
         android:textAlignment="textStart"
         android:textColor="@color/colorLightBlack"
         android:text="" />

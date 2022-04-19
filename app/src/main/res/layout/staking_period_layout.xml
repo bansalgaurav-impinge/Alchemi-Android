@@ -82,7 +82,7 @@
                             android:textSize="11sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=""
+                            android:text="4.50 P.A."
                             android:layout_toEndOf="@+id/tvFilterName"
                             android:layout_gravity="center"
                             android:gravity="center"

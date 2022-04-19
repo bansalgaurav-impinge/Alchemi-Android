@@ -3,7 +3,9 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
 }
+//apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 30
@@ -122,5 +124,30 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-messaging-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
+//room database
+    def room_version = "2.3.0"
+
+    //noinspection GradleDependency
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    // coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1'
+    // To use Kotlin annotation processing tool (kapt)
+//    kapt("androidx.room:room-compiler:$room_version")
+//   //  To use Kotlin Symbolic Processing (KSP)
+//    ksp("androidx.room:room-compiler:$room_version")
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    //implementation("androidx.room:room-ktx:$room_version")
+//    implementation "android.arch.lifecycle:extensions:1.1.0"
+//    kapt "android.arch.lifecycle:compiler:1.1.0"
+// Room
+//    implementation "android.arch.persistence.room:runtime:1.0.0"
+//    kapt "android.arch.persistence.room:compiler:1.0.0"
 }
+//apply plugin: 'kotlin-kapt'
 //apply plugin: 'com.google.gms.google-services'

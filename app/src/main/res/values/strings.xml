@@ -392,7 +392,14 @@
     <string name="enter_valid_cvv_number">Enter valid card CVV number.</string>
     <string name="enter_card_holder_name">Enter card holder name.</string>
     <string name="payment_method">Payment Method</string>
-    <string name="default_notification_channel_id">Alchemi</string>>
+    <string name="default_notification_channel_id">Alchemi</string>
+    <string name="error_card_expired">Card Expired.</string>
+    <string name="error_invalid_month">Invalid Month.</string>
+    <string name="invalid_card">Invalid Card.</string>
+    <string name="kindly_check_your_card_expiry_date">Kindly check card\'s expiry date.</string>
+    <string name="you_cannot_add_more_than_cards">You can\'t add more than 5 cards.</string>
+    <string name="card_saved_successfully">Card saved successfully.</string>
+    <string name="edit_card">Edit Cards</string>>
     <string-array name="SpinnerOptions">
         <item>@string/flexible_assets</item>
         <item>@string/three_months_terms</item>

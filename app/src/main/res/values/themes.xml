@@ -1,14 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Alchemi" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    //Theme.AppCompat.Light.NoActionBar
+    //Theme.MaterialComponents.DayNight.NoActionBar
+    <style name="Theme.Alchemi" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/black</item>
         <item name="colorPrimaryVariant">@color/black</item>
-        <item name="colorOnPrimary">@color/black</item>
+        //<item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/colorYellow</item>
         <item name="colorSecondaryVariant">@color/colorYellow</item>
         <item name="colorOnSecondary">@color/black</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">@color/colorYellow</item>
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
@@ -30,7 +34,11 @@
         <item name="android:layout_marginTop">10dp</item>
         <item name="fontFamily">@font/roboto</item>
     </style>
+    <style name="MyCheckBox" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorControlNormal">@color/colorDarkGrey</item>   <!-- normal border color change as you wish -->
+        <item name="colorControlActivated">@color/colorYellow</item> <!-- activated color change as you wish -->
 
+    </style>
     <style name="ButtonText_style_normal" parent="Widget.AppCompat.Button">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">15sp</item>
@@ -106,7 +114,7 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+   <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="CustomTabText" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">3sp</item>
@@ -135,9 +143,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.Alchemi.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+<!--    <style name="Theme.Alchemi.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />-->
 
-    <style name="Theme.Alchemi.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+<!--    <style name="Theme.Alchemi.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />-->
     <style name="switchTheme" parent="ThemeOverlay.AppCompat.Light">
         <item name="colorAccent">@color/black</item>
     </style>
@@ -152,7 +160,11 @@
         <item name="colorControlActivated">@color/colorLightBlack</item>
         <item name="colorControlHighlight">@color/colorYellow</item>
         <item name="android:progressDrawable">@drawable/progress_bar_bg</item>
-        <item name="android:minWidth">200dp</item>
+        <item name="android:indeterminateDrawable">@drawable/progress_bar_bg</item>
+        <item name="background">@color/colorLightBlack</item>
+        <item name="backgroundColor">@color/colorLightBlack</item>
+        <item name="android:maxHeight">20dp</item>
+        <item name="android:minWidth">300dp</item>
     </style>
 
 </resources>

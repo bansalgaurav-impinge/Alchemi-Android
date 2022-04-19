@@ -99,7 +99,7 @@ class EarnFragment: Fragment(), OnItemClickListener {
         val dividerItemDecoration = DividerItemDecoration(context, llm.orientation)
         dividerItemDecoration.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.divider)!!)
         earnAdapter = EarnAdapter(dataList)
-        rvList?.setHasFixedSize(true)
+//        rvList?.setHasFixedSize(true)
         rvList?.adapter = earnAdapter
 
         (activity as HomeActivity).tab_layout?.visibility=View.VISIBLE

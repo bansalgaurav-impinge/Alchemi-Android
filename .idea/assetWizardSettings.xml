@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialicons/star_border/baseline_star_border_24.xml" />
+                                      <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialicons/chat_bubble/baseline_chat_bubble_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,9 +28,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ffb404" />
-                            <entry key="outputName" value="ic_star_outline" />
-                            <entry key="sourceFile" value="$USER_HOME$/Downloads/home-black-hdpi.svg" />
+                            <entry key="color" value="866910" />
+                            <entry key="outputName" value="ic__chat_bubble" />
                           </map>
                         </option>
                       </PersistentState>

@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.veriff:detector-common:3.15.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6cd296e86ac464170942a96bcbb9eabc/jetified-detector-common-3.15.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6cd296e86ac464170942a96bcbb9eabc/jetified-detector-common-3.15.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6cd296e86ac464170942a96bcbb9eabc/jetified-detector-common-3.15.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/39af8f5fe25cc0859eada779cab36ba9/jetified-detector-common-3.15.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/39af8f5fe25cc0859eada779cab36ba9/jetified-detector-common-3.15.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/39af8f5fe25cc0859eada779cab36ba9/jetified-detector-common-3.15.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

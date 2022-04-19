@@ -118,7 +118,7 @@ class ContactSupportFragment: Fragment() {
      */
     fun saveContactSupportMessage(message: String){
         val hashMap= HashMap<String,String>()
-        hashMap[Constants.KEY_USER]=""+AlchemiApplication.alchemiApplication?.getUUID()
+      //  hashMap[Constants.KEY_USER]=""+AlchemiApplication.alchemiApplication?.getUUID()
         hashMap[Constants.KEY_MESSAGE]=message
         if (!ViewUtils.verifyAvailableNetwork(requireContext())) {
             ViewUtils.showSnackBar(view, getString(R.string.you_re_not_connected_to_the_internet_n_please_connect_and_retry))

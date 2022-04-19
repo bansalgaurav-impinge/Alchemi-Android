@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout/add_card_detail_layout.xml" value="0.1120144534778681" />
+        <entry key="app/src/main/res/layout/add_payment_method_layout.xml" value="0.1120144534778681" />
+        <entry key="app/src/main/res/layout/applying_card_layout.xml" value="0.1120144534778681" />
+        <entry key="app/src/main/res/layout/bottom_sheet_layout.xml" value="0.1120144534778681" />
+        <entry key="app/src/main/res/layout/card_fragment_layout.xml" value="0.1120144534778681" />
+        <entry key="app/src/main/res/layout/card_pager_layout.xml" value="0.1120144534778681" />
+        <entry key="app/src/main/res/layout/coin_detail_fragment_layout.xml" value="0.1120144534778681" />
+        <entry key="app/src/main/res/layout/earn_fragment_layout.xml" value="0.1120144534778681" />
+        <entry key="app/src/main/res/layout/edit_card_bottom_sheet.xml" value="0.1120144534778681" />
+        <entry key="app/src/main/res/layout/edit_profile_fragment_layout.xml" value="0.1120144534778681" />
+        <entry key="app/src/main/res/layout/home_fragment_layout.xml" value="0.1120144534778681" />
+        <entry key="app/src/main/res/layout/settings_fragment_layout.xml" value="0.1120144534778681" />
+        <entry key="app/src/main/res/layout/staking_adapter.xml" value="0.1120144534778681" />
+        <entry key="app/src/main/res/layout/tab_layout.xml" value="0.1120144534778681" />
+        <entry key="app/src/main/res/layout/track_fragent_layout.xml" value="0.1120144534778681" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>
